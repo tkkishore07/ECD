@@ -1,0 +1,22 @@
+{
+	"results": [
+		{
+			"title": "Employee Search"	
+		},
+		{
+			"title": "My Requests"		
+		},
+		{
+			"title": "My Approvals"		
+		},
+		{
+			"title": "Status Report"	
+		},
+		{
+			"title": "Delegation"		
+		},
+		{
+			"title": "Help"	
+		}
+	]	
+}

@@ -1,0 +1,6 @@
+@CHARSET "ISO-8859-1";
+
+        html, body { 
+            height: 100%; 
+            background-image: linear-gradient(to bottom,#dff2f3 0,#dcecf0 50%,#dde4eb 100%);
+        }
