@@ -1,0 +1,636 @@
+<core:View xmlns:core="sap.ui.core"  
+        	xmlns:mvc="sap.ui.core.mvc" 
+        	xmlns:l="sap.ui.layout"
+        	xmlns="sap.m" 
+        	xmlns:custom="HR.controls"
+        	controllerName="HR.view.EmployeeDataChange" 
+        	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+        	xmlns:html="http://www.w3.org/1999/xhtml">
+        <html:style>
+                div[id$="EmployeeDataChange"] .sapMFlexBox {
+                    margin-left: auto !important;
+                    margin-right: auto !important;
+                    max-width: 1024px;
+                }
+                
+        	    div[id$="EmployeeDataChange"] .sapMPanelContent {
+                    padding: 0rem;
+                }
+                div[id$="EmployeeDataChange"] .sapMPanelBG{
+        	        background-color: rgba(255,255,255,0.6);
+        	    }
+        	    
+        	    @media screen and (min-width: 1354px) {
+                    div[id$="EmployeeDataChange"] .header {
+                        margin-top:20px;
+                    }
+                }
+                div[id$="EmployeeDataChange"] .sapMListTblCell  {
+                    border-bottom: none !important;
+                }
+                div[id$="ManagerSearch-dialog"] .marginPersonData {
+                   margin-left:10px;  
+                   margin-top:3px !important;  
+             	}
+             	div[id$="ManagerSearch-dialog"] .sapMLabelMaxWidth {
+                    font-size: 0.75rem !important;
+                }
+                div[id$="ManagerSearch-dialog"] .sapUiFixFlexFlexible{
+                    overflow:visible !important;
+                }
+                div[id$="ManagerSearch-dialog"] .sapUiFixFlexFixed{
+                    height:80px !important;
+                }
+                div[id$="ManagerSearch-dialog"] .sapMImg{
+                    margin-top:3px !important;
+                    margin-left:5px !important;
+                    border-radius:3px !important;
+                    margin-right: 10px !important;
+                }
+                div[id$="ManagerSearch-dialog"] .sapMLIBContent{
+                    padding: 5px !important;
+                }
+                div[id$="ManagerSearch-dialog"] .sapMGrowingListTrigger{
+                    border-top: none !important;
+                }
+                
+                // CSS for Leader Search dialog
+             	div[id$="LeaderSearch-list"] .sapMFlexItem {
+                        position: relative;
+                        margin-right: 10px !important;
+             	}
+             	
+             	div[id$="LeaderSearch-list"] .sapMImg {
+                    margin-top:3px !important;
+                    margin-left:5px !important;
+                    border-radius:3px !important;
+                    margin-right: 10px !important;
+                }
+             	
+             	div[id$="LeaderSearch-dialog"] .sapMLabelMaxWidth {
+                    font-size: 0.75em !important;
+                }
+                div[id$="LeaderSearch-dialog"] .sapUiFixFlexFlexible{
+                    overflow:visible !important;
+                }
+                div[id$="LeaderSearch-dialog"] .sapUiFixFlexFixed{
+                    height:80px !important;
+                }
+              
+                div[id$="LeaderSearch-dialog"] .sapMLIBContent{
+                    padding: 5px !important;
+                }
+                div[id$="LeaderSearch-dialog"] .sapMGrowingListTrigger{
+                    border-top: none !important;
+                }
+                div[id$="EmployeeDataChange"] .dropDownError {
+                    border-color: #e52929;
+                    border-width: 2px;
+                }
+                <!-->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Start of Code by Deepankar <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<-->
+                div[id$="JobCodeSearchDialog--JobCodeSearchForm"] .sapMListTblCell  {
+                border-bottom: none !important;
+                border-top: none !important;
+                }
+                div[id$="CostCenterSearchDialog--CostCenterForm"] .sapMListTblCell {
+                border-bottom: none !important;
+                border-top: none !important;
+                }
+                .sapMDialogSection{
+                  padding: 1rem;
+                }
+                <!-->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> End of Code by Deepankar <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<-->
+             </html:style>    
+        	<Page id="EmployeeDataChange" title="{i18n>employeeDataChangeTitle}" showNavButton="{device>/isPhone}" navButtonPress="handleNavButtonPress">
+            
+        	<VBox>
+        	<custom:Header 
+        	        id                  = "header"
+        	        name                = "{/d/EmployeeName}"
+                    title               = "{/d/I0001PtextCurr}"
+                    employeeID          = "{/d/PersonId}"
+                    showMoreDetails     = "false" />
+
+        	<Text/>
+            <Table inset="false" backgroundDesign="Transparent" class="sapUiSizeCompact">
+            <columns>
+              <Column width="30%"/>
+              <Column width="30%" minScreenWidth="Tablet"/>
+              <Column width="40%" minScreenWidth="Tablet" demandPopin="true"/>
+            </columns>
+            <ColumnListItem vAlign="Middle">
+                <cells>
+                    <ObjectIdentifier title="Effective Date" id="effectiveDate-title"/>
+                    <Text/>
+                    
+                    <Table backgroundDesign="Transparent"><columns><Column width="15%"/><Column width="70%"/><Column width="15%"/></columns>
+                        <ColumnListItem>
+                            <cells>
+                                <Button icon="sap-icon://message-error" type="Reject" id="effectiveDate-error" press="error" app:id="effectiveDate"/>
+                                <DatePicker 
+                                change="validations"
+                                displayFormat="long" valueFormat= "long"  
+                                width="100%" id="effectiveDate" placeholder="mm-dd-yyyy" />
+                                <Text/>
+                            </cells>
+                        </ColumnListItem>
+                    </Table>
+                </cells>
+              </ColumnListItem>  
+            </Table>
+        <Panel expandable="true" expanded="false" headerText="Organization Assignment" class="sapUiSizeCompact" id="organizationAssignment">  
+            <Table inset="false" backgroundDesign="Transparent">
+            <columns>
+              <Column width="30%"/>
+              <Column width="30%" minScreenWidth="Tablet" demandPopin="true"/>
+              <Column width="40%" minScreenWidth="Tablet" demandPopin="true"/>
+            </columns>
+            <items>
+              <ColumnListItem vAlign="Middle">
+                <cells>
+                    <ObjectIdentifier title="Manager" id="manager-title"/>
+                    
+                    <Table backgroundDesign="Transparent"><columns><Column /><Column width="2em"/></columns>
+                    <ColumnListItem>
+                        <cells>
+                            <Text id="manager-old" text="{/d/ManagerPersonIdCurr} {/d/ManagerNameCurr}"/> 
+                            <Button icon="sap-icon://edit" type="Transparent" app:id="manager" press="edit" id="manager-edit"/>
+                        </cells>
+                    </ColumnListItem>
+                    </Table>
+                    
+                    <Table id="manager-table" backgroundDesign="Transparent"><columns><Column width="2em"/><Column /><Column width="2em"/></columns>
+                    <ColumnListItem>
+                        <cells>
+                            <Button icon="sap-icon://message-error" type="Reject" id="manager-error" press="error" app:id="manager"/>
+                            <Input 
+                                valueHelpRequest="managerSearchPopup"
+                                valueHelpOnly="true"
+                                showValueHelp="true" 
+                                id="manager"/>
+                            <Button icon="sap-icon://sys-cancel-2" type="Transparent" app:id="manager" press="cancel" id="manager-cancel"/>
+                        </cells>
+                    </ColumnListItem>
+                    </Table>
+
+                </cells>
+              </ColumnListItem>
+              <ColumnListItem vAlign="Middle" id="becomingAPeopleManager-section">
+                <cells>
+                  <ObjectIdentifier
+                    title="Becoming a People Manager"
+                    id="becomingAPeopleManager-title"/>
+                    
+                    <Table backgroundDesign="Transparent"><columns><Column /><Column width="2em"/></columns>
+                    <ColumnListItem>
+                        <cells>
+                            <Text text="{
+                               path: '/d/PeopleMngrCurr',
+                               formatter: 'HR.util.Formatter.becomingAPeopleManager'
+                            }"
+                            id="becomingAPeopleManager-old"/>    
+                            <Button icon="sap-icon://edit" type="Transparent" app:id="becomingAPeopleManager" press="edit" id="becomingAPeopleManager-edit"/>
+                        </cells>
+                    </ColumnListItem>
+                    </Table>    
+                    
+                    <Table id="becomingAPeopleManager-table" backgroundDesign="Transparent"><columns><Column width="2em"/><Column /><Column width="2em"/></columns>
+                        <ColumnListItem>
+                            <cells>
+                            <Button icon="sap-icon://message-error" type="Reject" app:id="becomingAPeopleManager" id="becomingAPeopleManager-error" press="error"/>
+                                <Select id="becomingAPeopleManager" width="100%" change="validations">
+                                        <core:Item key="" text="" />
+                                        <core:Item key="X" text="Yes" />
+                                        <core:Item key=" " text="No" />
+                                </Select>
+                                <Button icon="sap-icon://sys-cancel-2" type="Transparent" app:id="becomingAPeopleManager" press="cancel" id="becomingAPeopleManager-cancel"/>
+                            </cells>
+                        </ColumnListItem>
+                    </Table>
+                  
+                </cells>
+              </ColumnListItem>
+              
+              <ColumnListItem vAlign="Middle">
+                <cells>
+                  <ObjectIdentifier
+                    id="costCenter-title"
+                    title="Cost Center"/>
+                    <Table backgroundDesign="Transparent"><columns><Column /><Column width="2em"/></columns>
+                        <ColumnListItem>
+                            <cells>
+                                <Text text="{/d/I0001KostlCurr} {/d/I0001KostlNameCurr}" id="costCenter-old"/>
+                                <Button icon="sap-icon://edit" type="Transparent" app:id="costCenter" press="edit" id="costCenter-edit"/>
+                            </cells>
+                        </ColumnListItem>
+                    </Table>                    
+                    
+                    <Table id="costCenter-table" backgroundDesign="Transparent"><columns><Column width="2em"/><Column /><Column width="2em"/></columns>
+                        <ColumnListItem>
+                            <cells>
+                                <Button icon="sap-icon://message-error" type="Reject" app:id="costCenter" id="costCenter-error" press="error"/>
+                                <Input showValueHelp="true" id="costCenter"
+                                    valueHelpRequest="costCenterPopup"
+                                    valueHelpOnly="true"/>
+                                <Button icon="sap-icon://sys-cancel-2" type="Transparent" app:id="costCenter" press="cancel" id="costCenter-cancel"/>
+                            </cells>
+                        </ColumnListItem>
+                    </Table>
+                </cells>
+              </ColumnListItem>
+            </items>
+            </Table>
+            </Panel>
+            <Panel expandable="true" expanded="false" headerText="Location"  class="sapUiSizeCompact" id="location">  
+            <Table inset="false" backgroundDesign="Transparent" >
+            <columns>
+              <Column width="30%"/>
+              <Column width="30%" minScreenWidth="Tablet" demandPopin="true"/>
+              <Column width="40%" minScreenWidth="Tablet" demandPopin="true"/>
+            </columns>
+            <items>
+              <ColumnListItem vAlign="Middle">
+                <cells>
+                  <ObjectIdentifier
+                    title="Country/Legal Entity"/>
+                      <Table backgroundDesign="Transparent"><columns><Column /><Column width="2em"/></columns>
+                        <ColumnListItem>
+                            <cells>
+                                <Text text="{/d/I0001Werks} {/d/I0001WerksName}"/> 
+                                <Text/>
+                            </cells>
+                        </ColumnListItem>
+                    </Table>
+                </cells>
+              </ColumnListItem>
+        
+                <ColumnListItem vAlign="Middle">
+                <cells>
+                  <ObjectIdentifier 
+                    title="Office Location"
+                    id="officeLocation-title"/>
+                    <Table backgroundDesign="Transparent"><columns><Column /><Column width="2em"/></columns>
+                        <ColumnListItem>
+                            <cells>
+                                <Text id="officeLocation-old" text="{/d/I0001BtrtlCurr} {/d/I0001BtrtlNameCurr}"/>    
+                                <Button icon="sap-icon://edit" type="Transparent" app:id="officeLocation" press="edit" id="officeLocation-edit"/>
+                            </cells>
+                        </ColumnListItem>
+                    </Table>
+                    <Table backgroundDesign="Transparent" id="officeLocation-table"><columns><Column width="2em"/><Column /><Column width="2em"/></columns>
+                        <ColumnListItem>
+                            <cells>
+                                <Button icon="sap-icon://message-error" type="Reject" app:id="officeLocation" id="officeLocation-error" press="error"/>
+                                    <Select id="officeLocation" width="100%" items="{/d/results}" change="validations">
+                                        <core:Item key="{Btrtl}" text="{Btrtl} {Btext}" />
+                                    </Select>
+                                <Button icon="sap-icon://sys-cancel-2" type="Transparent" app:id="officeLocation" press="cancel" id="officeLocation-cancel"/>
+                            </cells>
+                        </ColumnListItem>
+                    </Table>
+                </cells>
+              </ColumnListItem>
+            </items>
+            </Table>
+            </Panel>      
+               
+            <Panel expandable="true" expanded="false" headerText="Job"  class="sapUiSizeCompact" id="job">     
+            <Table inset="false" backgroundDesign="Transparent" >
+            <columns>
+              <Column width="30%"/>
+              <Column width="30%" minScreenWidth="Tablet" demandPopin="true"/>
+              <Column width="40%" minScreenWidth="Tablet" demandPopin="true"/>
+            </columns>
+            <items>
+              <ColumnListItem vAlign="Middle">
+                <cells>
+                  <ObjectIdentifier title="Job Code" id="jobCode-title"/>
+                  
+                  <Table backgroundDesign="Transparent"><columns><Column /><Column width="2em"/></columns>
+                        <ColumnListItem>
+                            <cells>
+                                <Text text="{/d/I0001StellCurr} {/d/I0001ShortCurr}" id="jobCode-old"></Text>  
+                                <Button icon="sap-icon://edit" type="Transparent" app:id="jobCode" press="edit" id="jobCode-edit" />
+                            </cells>
+                        </ColumnListItem>
+                  </Table>
+                  <Table backgroundDesign="Transparent" id="jobCode-table"><columns><Column width="2em"/><Column /><Column width="2em"/></columns>
+                        <ColumnListItem>
+                            <cells>
+                               <Button icon="sap-icon://message-error" type="Reject" app:id="jobCode" id="jobCode-error" press="error"/>
+                               <Input showValueHelp="true" valueHelpOnly="true" id="jobCode" onChange="validations" valueHelpRequest="jobCodeSearchPopup"/>
+                               <Button icon="sap-icon://sys-cancel-2" type="Transparent" app:id="jobCode" press="cancel" id="jobCode-cancel"/>
+                            </cells>
+                        </ColumnListItem>
+                  </Table>
+                </cells>
+              </ColumnListItem>
+        
+                <ColumnListItem vAlign="Middle">
+                <cells>
+                  <ObjectIdentifier
+                    title="Job Title" id="jobTitle-title"/>
+                    <Table backgroundDesign="Transparent"><columns><Column /><Column width="2em"/></columns>
+                        <ColumnListItem>
+                            <cells>
+                                <Text text="{/d/I9002ZjobtitleCurr}" id="jobTitle-old"></Text>
+                                <Text/>
+                            </cells>
+                        </ColumnListItem>
+                  </Table>    
+                  <Table backgroundDesign="Transparent" id="jobTitle-table"><columns><Column width="2em"/><Column /><Column width="2em"/></columns>
+                        <ColumnListItem>
+                            <cells>
+                               <Text/>
+                               <Input id="jobTitle"/>
+                               <Text/>
+                            </cells>
+                        </ColumnListItem>
+                  </Table>
+                </cells>
+              </ColumnListItem>
+              
+              <ColumnListItem vAlign="Middle">
+                <cells>
+                  <ObjectIdentifier
+                    id="positionTitle-title"
+                    title="Position Title"/>
+                  <Table backgroundDesign="Transparent"><columns><Column /><Column width="2em"/></columns>
+                        <ColumnListItem>
+                            <cells>
+                               <Text text="{/d/I0001PtextCurr}" id="positionTitle-old"></Text>
+                               <Button icon="sap-icon://edit" type="Transparent" app:id="positionTitle" press="edit" id="positionTitle-edit" />
+                            </cells>
+                        </ColumnListItem>
+                  </Table>
+                  <Table backgroundDesign="Transparent" id="positionTitle-table"><columns><Column width="2em"/><Column /><Column width="2em"/></columns>
+                        <ColumnListItem>
+                            <cells>
+                               <Button icon="sap-icon://message-error" type="Reject" app:id="positionTitle" id="positionTitle-error" press="error"/>
+                               <Input id="positionTitle" maxLength="40" change="validations"/>
+                               <Button icon="sap-icon://sys-cancel-2" type="Transparent" app:id="positionTitle" press="cancel" id="positionTitle-cancel"/>
+                            </cells>
+                        </ColumnListItem>
+                  </Table>
+                  
+                  
+                </cells>
+              </ColumnListItem>
+              
+              <ColumnListItem vAlign="Middle">
+                <cells>
+                  <ObjectIdentifier id="jobLevel-title"
+                    title="Job Level"/>
+
+                  <Table backgroundDesign="Transparent"><columns><Column /><Column width="2em"/></columns>
+                        <ColumnListItem>
+                            <cells>
+                               <Text text="{/d/I1051JcodeNameCurr}" id="jobLevel-old"></Text>
+                               <Text/>
+                            </cells>
+                        </ColumnListItem>
+                  </Table>
+                  <Table backgroundDesign="Transparent" id="jobLevel-table"><columns><Column width="2em"/><Column /><Column width="2em"/></columns>
+                        <ColumnListItem>
+                            <cells>
+                               <Text/>
+                               <Input id="jobLevel"/>
+                               <Text/>
+                            </cells>
+                        </ColumnListItem>
+                  </Table>  
+                </cells>
+              </ColumnListItem>
+              
+              <ColumnListItem vAlign="Middle">
+                <cells>
+                  <ObjectIdentifier id="managerLevel-title"
+                    title="Signature Authority"/>
+                    <Table backgroundDesign="Transparent"><columns><Column /><Column width="2em"/></columns>
+                        <ColumnListItem>
+                            <cells>
+                               <Text id="managerLevel-old" text="{/d/I1010HilfmCurr} {/d/I1010HilfmDescrCurr}"></Text>  
+                                <Text/>
+                            </cells>
+                        </ColumnListItem>
+                  </Table>
+                  <Table backgroundDesign="Transparent" id="managerLevel-table"><columns><Column width="2em"/><Column /><Column width="2em"/></columns>
+                        <ColumnListItem>
+                            <cells>
+                               <Text/>
+                               <Input id="managerLevel"/>
+                               <Text/>
+                            </cells>
+                        </ColumnListItem>
+                  </Table>  
+                  <Text/>
+                </cells>
+              </ColumnListItem>
+              
+            </items>
+            </Table>
+            </Panel>
+            <Panel expandable="true" expanded="false" headerText="Pay" class="sapUiSizeCompact" id="pay">  
+            <Table inset="false" backgroundDesign="Transparent" >
+            <columns>
+              <Column width="30%"/>
+              <Column width="30%" minScreenWidth="Tablet" demandPopin="true"/>
+              <Column width="40%" minScreenWidth="Tablet" demandPopin="true"/>
+            </columns>
+            <items>
+              <ColumnListItem vAlign="Middle" id="annualSalary-section">
+                <cells>
+                  <ObjectIdentifier
+                    id="annualSalary-title"
+                    title="Annual Salary"/>
+                  <Table backgroundDesign="Transparent"><columns><Column /><Column width="2em"/></columns>
+                        <ColumnListItem>
+                            <cells>
+                               <Text id="annualSalary-old" text="{
+                               path: '/d/CurrAnsal',
+                               formatter: 'HR.util.Formatter.getMoney'
+                               } {/d/I0008Waers}"></Text>  
+                               <Button icon="sap-icon://edit" type="Transparent" app:id="annualSalary" press="edit" id="annualSalary-edit" />
+                            </cells>
+                        </ColumnListItem>
+                  </Table>
+                  <Table id="annualSalary-table" backgroundDesign="Transparent"><columns><Column width="2em"/><Column /><Column width="2em"/></columns>
+                        <ColumnListItem>
+                            <cells>
+                                <Button icon="sap-icon://message-error" type="Reject" id="annualSalary-error" press="error" app:id="annualSalary"/>
+                                <VBox>
+                                   <Input description="{/d/I0008Waers}" id="annualSalary" change="validations" maxLength="15"/>
+                                   <Text id="annualSalaryPartTime"/>
+                                </VBox>
+                                <Button icon="sap-icon://sys-cancel-2" type="Transparent" app:id="annualSalary" press="cancel" id="annualSalary-cancel"/>
+                            </cells>
+                        </ColumnListItem>
+                  </Table>
+                </cells>
+              </ColumnListItem>
+        
+                <ColumnListItem vAlign="Middle">
+                <cells>
+                  <ObjectIdentifier
+                    id="targetCommission-title"
+                    title="Target Commission"/>
+                  <Table backgroundDesign="Transparent"><columns><Column /><Column width="2em"/></columns>
+                        <ColumnListItem>
+                            <cells>
+                               <Text id="targetCommission-old"
+                                   text="{
+                                   path: '/d/CurrCommision',
+                                   formatter: 'HR.util.Formatter.getMoney'
+                                   } {/d/I0008Waers}">
+                                </Text>  
+                                <Button icon="sap-icon://edit" type="Transparent" app:id="targetCommission" press="edit" id="targetCommission-edit"/>
+                            </cells>
+                        </ColumnListItem>
+                  </Table>  
+                  <Table backgroundDesign="Transparent" id="targetCommission-table"><columns><Column width="2em"/><Column /><Column width="2em"/></columns>
+                        <ColumnListItem>
+                            <cells>
+                               <Button icon="sap-icon://message-error" type="Reject" id="targetCommission-error" press="error" app:id="targetCommission"/>
+                               <VBox>
+                                   <Input description="{/d/I0008Waers}" id="targetCommission" change="validations" maxLength="13"/>
+                                   <Text id="targetCommissionPartTime"/>
+                                </VBox>
+                               <Button icon="sap-icon://sys-cancel-2" type="Transparent" app:id="targetCommission" press="cancel" id="targetCommission-cancel"/>
+                            </cells>
+                        </ColumnListItem>
+                  </Table>
+                </cells>
+              </ColumnListItem>
+              
+              <ColumnListItem vAlign="Middle">
+                <cells>
+                  <ObjectIdentifier
+                    id="rsu-title"
+                    title="RSU"/>
+                  <Table backgroundDesign="Transparent"><columns><Column /><Column width="2em"/></columns>
+                        <ColumnListItem>
+                            <cells>
+                                <Text id="rsu-old" text="Check with HRBP"/>
+                                <Button icon="sap-icon://edit" type="Transparent" app:id="rsu" press="edit" id="rsu-edit"/>
+                            </cells>
+                        </ColumnListItem>
+                  </Table>  
+                  <Table backgroundDesign="Transparent" id="rsu-table"><columns><Column width="2em"/><Column /><Column width="2em"/></columns>
+                        <ColumnListItem>
+                            <cells>
+                               <Button icon="sap-icon://message-error" type="Reject" id="rsu-error" press="error" app:id="rsu"/>
+                               <Input id="rsu" change="validations" maxLength="10"/>
+                               <Button icon="sap-icon://sys-cancel-2" type="Transparent" app:id="rsu" press="cancel" id="rsu-cancel"/>
+                            </cells>
+                        </ColumnListItem>
+                  </Table>
+                </cells>
+              </ColumnListItem>
+              
+              <ColumnListItem vAlign="Middle">
+                <cells>
+                  <ObjectIdentifier
+                    id="stockOption-title"
+                    title="Stock Option"/>
+                  <Table backgroundDesign="Transparent"><columns><Column /><Column width="2em"/></columns>
+                        <ColumnListItem>
+                            <cells>
+                                <Text text="Check with HRBP" id="stockOption-old"/>
+                                <Button icon="sap-icon://edit" type="Transparent" app:id="stockOption" press="edit" id="stockOption-edit"/>
+                            </cells>
+                        </ColumnListItem>
+                  </Table>  
+                  <Table backgroundDesign="Transparent" id="stock-table"><columns><Column width="2em"/><Column /><Column width="2em"/></columns>
+                        <ColumnListItem>
+                            <cells>
+                               <Button icon="sap-icon://message-error" type="Reject" id="stockOption-error" press="error" app:id="stockOption"/>
+                               <Input id="stockOption" change="validations" maxLength="10"/>
+                               <Button icon="sap-icon://sys-cancel-2" type="Transparent" app:id="stockOption" press="cancel" id="stockOption-cancel"/>
+                            </cells>
+                        </ColumnListItem>
+                  </Table>
+                </cells>
+              </ColumnListItem>
+              
+            </items>
+            </Table>
+             </Panel>
+            <Panel expandable="true" expanded="false" headerText="SDSS/SDSM Only" class="sapUiSizeCompact" id="sdssSdsmOnly">     
+            <Table inset="false" backgroundDesign="Transparent" >
+            <columns>
+              <Column width="30%"/>
+              <Column width="30%" minScreenWidth="Tablet" demandPopin="true"/>
+              <Column width="40%" minScreenWidth="Tablet" demandPopin="true"/>
+            </columns>
+            <items>
+              <ColumnListItem vAlign="Middle">
+                <cells>
+                  <ObjectIdentifier
+                    id="leader-title"
+                    title="Leader"/>
+                  <Table backgroundDesign="Transparent"><columns><Column /><Column width="2em"/></columns>
+                        <ColumnListItem>
+                            <cells>
+                               <Text text="{/d/I0001ZzldridCurr} {/d/I0001ZzldridNameCurr}" id="leader-old"></Text>
+                               <Button icon="sap-icon://edit" type="Transparent" app:id="leader" press="edit" id="leader-edit"/>
+                             </cells>
+                        </ColumnListItem>
+                  </Table>      
+                  <Table id="leader-table" backgroundDesign="Transparent"><columns><Column width="2em"/><Column /><Column width="2em"/></columns>
+                        <ColumnListItem>
+                            <cells>
+                                <Button icon="sap-icon://message-error" type="Reject" id="leader-error" press="error" app:id="leader"/>
+                                <Input showValueHelp="true" id="leader" change="validations" valueHelpRequest="leaderSearchPopup" valueHelpOnly="true" />
+                                <Button icon="sap-icon://sys-cancel-2" type="Transparent" app:id="leader" press="cancel" id="leader-cancel"/>
+                            </cells>
+                        </ColumnListItem>
+                  </Table>     
+                </cells>
+              </ColumnListItem>
+        
+                <ColumnListItem vAlign="Middle">
+                <cells>
+                  <ObjectIdentifier
+                   id="laborClassification-title"
+                    title="Labor Classification"/>
+                   <Table backgroundDesign="Transparent"><columns><Column /><Column width="2em"/></columns>
+                        <ColumnListItem>
+                            <cells>
+                                <Text text="{/d/LaborClassCurr}" id="laborClassification-old"/>
+                                <Button icon="sap-icon://edit" type="Transparent" app:id="laborClassification" press="edit" id="laborClassification-edit"/>
+                            </cells>
+                        </ColumnListItem>
+                  </Table>
+                   <Table backgroundDesign="Transparent" id="laborClassification-table"><columns><Column width="2em"/><Column /><Column width="2em"/></columns>
+                        <ColumnListItem>
+                            <cells>
+                               <Button icon="sap-icon://message-error" type="Reject" id="laborClassification-error" press="error" app:id="laborClassification"/>
+                                <Select id="laborClassification" width="100%" change="validations">
+                                        <core:Item key="" text="" />
+                                        <core:Item key="DL" text="DL" />
+                                        <core:Item key="IDL" text="IDL" />
+                                </Select>
+                               <Button icon="sap-icon://sys-cancel-2" type="Transparent" app:id="laborClassification" press="cancel" id="laborClassification-cancel"/>
+                            </cells>
+                        </ColumnListItem>
+                  </Table>
+                </cells>
+              </ColumnListItem>
+            </items>
+            </Table>    
+            </Panel>
+            <TextArea placeholder="Comments" id="comments" cols="200" rows="3" maxLength="250"/>
+            </VBox>
+            <footer>
+                <bar>
+                    <contentRight>
+                        <!--<Button text="Cancel ECD" type="Emphasized" press="cancelEmployeeDataChange"/>-->
+                        <!--<Button text="Save Draft" type="Emphasized" press="saveDraft"/>-->
+                        <Button text="Close" type="Emphasized" press="close"/>
+                        <Button text="Review" type="Emphasized" press="review"/>
+                    </contentRight>
+                </bar>
+                
+            </footer>
+        	</Page>
+</core:View>

@@ -1,0 +1,30 @@
+<core:FragmentDefinition
+  xmlns="sap.m"
+  xmlns:html="http://www.w3.org/1999/xhtml"
+        xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+  xmlns:core="sap.ui.core">
+  <SelectDialog
+    title="{i18n>selectDelFTitle}"
+    id="DelegateSearch"
+    items="{/d/results}"
+    search="_delegateSearchPopupSearch"
+    confirm="_delegateSearchPopupConfirm"
+    contentHeight="30%"
+    contentWidth="30rem">
+   
+        <CustomListItem type="Active">
+        <HBox class="fixFlexHorizontal" vertical="false">
+              <Image src="{ path: 'EmployeeNo', formatter: 'HR.util.General.loadPicture' }" width="40px"/>
+            <HBox>
+            
+                        <VBox class="marginPersonData">
+                            <Text text="{FirstName}"/>
+                            <Label text="{Plstx}"/>
+                            <Label text="Employee ID: {PersonID}"/>
+                        </VBox>    
+          </HBox>
+          </HBox>
+       </CustomListItem> 
+
+  </SelectDialog>
+</core:FragmentDefinition>

@@ -1,0 +1,43 @@
+<core:FragmentDefinition
+  xmlns="sap.m"
+  xmlns:html="http://www.w3.org/1999/xhtml"
+  xmlns:core="sap.ui.core">
+  
+  <Dialog id="DelegateDiag"
+	title="{i18n>delegationFTitle}"
+	contentWidth="30rem">
+  
+  	    <Table id="DelegationForm" inset="false" backgroundDesign="Transparent" class="sapUiSizeCompact">
+            <columns>
+              <Column width="40%"/>
+              <Column width="60%" minScreenWidth="Tablet"  demandPopin="true"  />
+            </columns>
+            <items>
+                <ColumnListItem vAlign="Middle">
+                <cells>
+                    <ObjectIdentifier title="Delegate To"/>
+                    <Input showValueHelp="true" valueHelpOnly="true" id="delegateTo" valueHelpRequest="_delegateSearchPopup"/>
+                </cells>
+                </ColumnListItem>
+                <ColumnListItem vAlign="Middle">
+                <cells>
+                    <ObjectIdentifier title="Start Date"/>
+                    <DatePicker change="validations" displayFormat="long" valueFormat= "long" width="100%" id="startDate" placeholder="mm-dd-yyyy"/>
+                </cells>
+                </ColumnListItem>
+                <ColumnListItem vAlign="Middle">
+                <cells>
+                    <ObjectIdentifier title="End Date"/>
+                    <DatePicker change="validations" displayFormat="long" valueFormat= "long" width="100%" id="endDate" placeholder="mm-dd-yyyy"/>
+                </cells>
+                </ColumnListItem>
+            </items>
+        </Table>
+        
+    	<buttons>
+	    <Button id="ButtonAdd" text="Add" press="addDelegate"/>
+	    <Button id="ButtonClose" text="Close" press="closeDialog"/>
+	    </buttons>
+	    
+    </Dialog>
+</core:FragmentDefinition>  

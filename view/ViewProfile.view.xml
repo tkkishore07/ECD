@@ -1,0 +1,396 @@
+<core:View xmlns:core="sap.ui.core"  
+        	xmlns:mvc="sap.ui.core.mvc" 
+        	xmlns:l="sap.ui.layout"
+        	xmlns="sap.m" 
+        	xmlns:custom="HR.controls"
+        	controllerName="HR.view.ViewProfile" 
+        	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+        	xmlns:html="http://www.w3.org/1999/xhtml"
+        	xmlns:table="sap.ui.table">
+        	<html:style>
+                div[id$="ViewProfile"] .sapMVBox{
+                    margin-left: auto !important;
+                    margin-right: auto !important;
+                    max-width: 1024px;
+                }
+        	   
+                div[id$="ViewProfile"] .sapMPanelContent {
+                    padding: 0rem;
+                }
+                div[id$="ViewProfile"] .sapMPanelBG{
+        	        background-color: rgba(255,255,255,0.6);
+        	    }
+                @media screen and (min-width: 1354px) {
+                    div[id$="ViewProfile"] .header {
+                        margin-top:20px;
+                        margin-bottom: 20px;
+                    }
+                }
+                div[id$="ViewProfile"] .sapMListTblCell {
+                    border-bottom: none !important;
+                 
+                }
+            </html:style>  
+        	<Page id="ViewProfile" title="{i18n>viewProfileTitle}" showNavButton="{device>/isPhone}" navButtonPress="handleNavButtonPress">
+            
+        	<VBox>
+        	<custom:Header 
+        	        id                  = "header"
+        	        name                = "{/d/EmpName}"
+                    title               = "{/d/EmpPos}"
+                    employeeID          = "{/d/PersonId}"
+                    showMoreDetails     = "false" 
+                    showOfficeDetails   = "true"
+                    localTime           = "{/d/LocalTime}"
+                    email               = "{/d/EmpEmail}"
+                    office              = "{/d/EmpOffNum}"
+                    mobile              = "{/d/EmpTele}"
+                    where_I_sit         = "SpaceView" />
+
+            <IconTabBar
+        		id="tabs"
+        		stretchContentHeight="true"
+        		backgroundDesign="Transparent"
+        		applyContentPadding="false"
+        		expanded="{device>/isNoPhone}"
+        		class="sapUiResponsiveContentPadding"
+        		select="onTabSelect">
+    		    <items>
+    			<IconTabFilter
+    				text="Employee Details"
+    				id="profileTab"
+    				selected="true"
+    				key ="profile"> 
+                <Panel expandable="true" expanded="false" headerText="Organization Assignment" class="sapUiSizeCompact" id="organizationAssignment">  
+                    <Table inset="false" backgroundDesign="Transparent">
+                        <columns>
+                          <Column width="30%"/>
+                          <Column width="50%" minScreenWidth="Tablet" demandPopin="true"/>
+                        </columns>
+                        <items>
+                          <ColumnListItem vAlign="Middle">
+                            <cells>
+                                <ObjectIdentifier title="Manager" id="manager-title"/>
+                                <Table backgroundDesign="Transparent"><columns><Column/></columns>
+                                <ColumnListItem>
+                                    <cells>
+                                        <Text id="manager" text="{/d/ManagerID} {/d/ManagerName}"/> 
+                                    </cells>
+                                </ColumnListItem>
+                                </Table>
+            
+                            </cells>
+                          </ColumnListItem>
+                        <ColumnListItem vAlign="Middle" id="peopleManager-section">
+                            <cells>
+                              <ObjectIdentifier  title="People Manager" id="peopleManager-title"/>
+                                 <Table backgroundDesign="Transparent"><columns><Column /></columns>
+                                <ColumnListItem>
+                                    <cells>
+                                        <Text text="{
+                                        path: '/d/PeopleMngr',
+                                        formatter: 'HR.util.Formatter.becomingAPeopleManager'}" id="peopleManager"/>    
+                                    </cells>
+                                </ColumnListItem>
+                                </Table>
+                              
+                            </cells>
+                          </ColumnListItem>
+                          
+                        <ColumnListItem vAlign="Middle">
+                            <cells>
+                              <ObjectIdentifier
+                                id="costCenter-title"
+                                title="Cost Center"/>
+                                <Table backgroundDesign="Transparent"><columns><Column /></columns>
+                                    <ColumnListItem>
+                                        <cells>
+                                            <Text text="{/d/Kostl} {/d/KostlName}" id="costCenter"/>
+                                        </cells>
+                                    </ColumnListItem>
+                                </Table>                    
+                            </cells>
+                          </ColumnListItem>
+                          <ColumnListItem vAlign="Middle">
+                            <cells>
+                              <ObjectIdentifier
+                                id="hireDate-title"
+                                title="Hire Date"/>
+                                <Table backgroundDesign="Transparent"><columns><Column/></columns>
+                                    <ColumnListItem>
+                                        <cells>
+                                            <Text text="{/d/HireDate}" id="hireDate"/>
+                                        </cells>
+                                    </ColumnListItem>
+                                </Table>                    
+                            </cells>
+                          </ColumnListItem>
+                            <ColumnListItem vAlign="Middle">
+                            <cells>
+                              <ObjectIdentifier
+                                id="seniorityDate-title"
+                                title="Seniority Date"/>
+                                <Table backgroundDesign="Transparent"><columns><Column/></columns>
+                                    <ColumnListItem>
+                                        <cells>
+                                            <Text text="{/d/SeniorityDate}" id="seniorityDate"/>
+                                        </cells>
+                                    </ColumnListItem>
+                                </Table>                    
+                            </cells>
+                          </ColumnListItem>
+                        </items>
+                    </Table>
+                </Panel>
+
+                <Panel expandable="true" expanded="false" headerText="Location" class="sapUiSizeCompact" id="location">  
+                    <Table inset="false" backgroundDesign="Transparent">
+                        <columns>
+                          <Column width="30%"/>
+                          <Column width="50%" minScreenWidth="Tablet" demandPopin="true"/>
+                        </columns>
+                        <items>
+                          <ColumnListItem vAlign="Middle">
+                            <cells>
+                                <ObjectIdentifier title="Country/Legal Entity" id="country-title"/>
+                                <Table backgroundDesign="Transparent"><columns><Column/></columns>
+                                <ColumnListItem>
+                                    <cells>
+                                        <Text text="{/d/Werks} {/d/WerksName}"/> 
+                                    </cells>
+                                </ColumnListItem>
+                                </Table>
+                            </cells>
+                          </ColumnListItem>
+                        <ColumnListItem vAlign="Middle" id="officeLocation-section">
+                            <cells>
+                              <ObjectIdentifier  title="Office Location" id="officeLocation-title"/>
+                                 <Table backgroundDesign="Transparent"><columns><Column /></columns>
+                                <ColumnListItem>
+                                    <cells>
+                                        <Text text="{/d/Btrtl} {/d/BtrtlName}" id="officeLoc"/>    
+                                    </cells>
+                                </ColumnListItem>
+                                </Table>
+                              
+                            </cells>
+                          </ColumnListItem>
+                        </items>
+                    </Table>
+                    </Panel>
+                
+                <Panel expandable="true" expanded="false" headerText="Contract Information" class="sapUiSizeCompact" id="contractInfo">  
+                    <Table inset="false" backgroundDesign="Transparent">
+                        <columns>
+                          <Column width="30%"/>
+                          <Column width="50%" minScreenWidth="Tablet" demandPopin="true"/>
+                        </columns>
+                        <items>
+                          <ColumnListItem vAlign="Middle">
+                            <cells>
+                                <ObjectIdentifier title="Company/Vendor Name" id="company-title"/>
+                                <Table backgroundDesign="Transparent"><columns><Column/></columns>
+                                <ColumnListItem>
+                                    <cells>
+                                        <Text text="{/d/CompanyName}"/> 
+                                    </cells>
+                                </ColumnListItem>
+                                </Table>
+                            </cells>
+                          </ColumnListItem>
+                        <ColumnListItem vAlign="Middle" id="contractendDate-section">
+                            <cells>
+                              <ObjectIdentifier  title="Contract End Date" id="contractendDate-title"/>
+                                 <Table backgroundDesign="Transparent"><columns><Column /></columns>
+                                <ColumnListItem>
+                                    <cells>
+                                        <Text text="{/d/ContractEnd}" id="contractendDate"/>    
+                                    </cells>
+                                </ColumnListItem>
+                                </Table>
+                            </cells>
+                          </ColumnListItem>
+                        <ColumnListItem vAlign="Middle" id="contractType-section">
+                            <cells>
+                              <ObjectIdentifier  title="Contract Type" id="contractType-title"/>
+                                 <Table backgroundDesign="Transparent"><columns><Column /></columns>
+                                <ColumnListItem>
+                                    <cells>
+                                        <Text text="{/d/ContractType}" id="contractType"/>    
+                                    </cells>
+                                </ColumnListItem>
+                                </Table>
+                            </cells>
+                          </ColumnListItem>
+                        </items>
+                    </Table>
+                    </Panel>
+                
+                <Panel expandable="true" expanded="false" headerText="Pay" visible="false" class="sapUiSizeCompact" id="payInfo">  
+                    <Table inset="false" backgroundDesign="Transparent" items= "{path: '/d/results'}">
+                        <columns>
+                          <Column width="30%"><Text text=""/></Column>
+                          <Column width="20%" minScreenWidth="Tablet" id="col-pay1" demandPopin="true"><Text id="effectiveDate-pay1" text="" /></Column>
+                          <Column width="20%" minScreenWidth="Tablet" id="col-pay2" demandPopin="true"><Text id="effectiveDate-pay2" text="" /></Column>
+                          <Column width="20%" minScreenWidth="Tablet" id="col-pay3" demandPopin="true"><Text id="effectiveDate-pay3" text="" /></Column>
+                        </columns>
+                        <items>
+                            <ColumnListItem vAlign="Middle">
+                                  
+                            <ObjectIdentifier title="{title}"/>
+                            
+                            <Text  text="{effectDate0}"/>
+                               
+                            <Text  text="{effectDate1}"/>
+                                   
+                            <Text  text="{effectDate2}"/>
+                        
+                          </ColumnListItem>
+    
+                        </items>
+                    </Table>
+                    </Panel>
+                 
+                <Panel expandable="true" expanded="false" headerText="Job" class="sapUiSizeCompact" id="jobInfo">  
+                        <Table inset="false" backgroundDesign="Transparent" items="{path:'/d/results'}"> 
+                        <columns>
+                          <Column width="30%"><Text text="" /></Column>
+                          <Column width="20%" minScreenWidth="Tablet" id="col-job1" demandPopin="true"><Text id="effectiveDate-job1" text="" /></Column>
+                          <Column width="20%" minScreenWidth="Tablet" id="col-job2" demandPopin="true"><Text id="effectiveDate-job2"  text="" /></Column>
+                          <Column width="20%" minScreenWidth="Tablet" id="col-job3" demandPopin="true"><Text id="effectiveDate-job3"  text="" /></Column>
+                        </columns>
+                        <items>
+                          <ColumnListItem vAlign="Middle">
+                            <cells> 
+                            <ObjectIdentifier title="{title}"/>
+                           
+                              
+                            <Text  text="{effectDate0}"/>
+                               
+                            <Text  text="{effectDate1}"/>
+                                   
+                            <Text  text="{effectDate2}"/>
+                            
+                            </cells>
+                          </ColumnListItem>
+                        </items>
+                    </Table>
+                    </Panel>  
+                <Panel expandable="true" expanded="false" headerText="Performance" visible="false" class="sapUiSizeCompact" id="performanceInfo">  
+                    <Table inset="false" backgroundDesign="Transparent" items= "{path: '/d/results'}" >
+                        <columns>
+                          <Column width="30%"><Text text="" /></Column>
+                          <Column width="20%" minScreenWidth="Tablet"  id="col-performance1" demandPopin="true"><Text id="effectiveDate-performance1" text="" /></Column>
+                          <Column width="20%" minScreenWidth="Tablet"  id="col-performance2" demandPopin="true"><Text id="effectiveDate-performance2" text="" /></Column>
+                          <Column width="20%" minScreenWidth="Tablet"  id="col-performance3" demandPopin="true"><Text id="effectiveDate-performance3" text="" /></Column>
+                        </columns>
+                         <items>
+                            <ColumnListItem vAlign="Middle">
+                                  
+                            <ObjectIdentifier title="{title}"/>
+                            
+                            <Text  text="{effectDate0}"/>
+                               
+                            <Text  text="{effectDate1}"/>
+                                   
+                            <Text  text="{effectDate2}"/>
+                        
+                          </ColumnListItem>
+    
+                        </items>
+                    </Table>
+                    </Panel>
+                    
+              
+                
+                </IconTabFilter>
+    			<IconTabFilter
+    				text="ECD History"
+    				id="historyTab"
+    				selected="false"
+    				key ="history"
+    				>
+       <table:Table id="ecdHistory" visible="false" table:selectionMode="Single" navigationMode="Paginator" class="sapUiSizeCompact sapUiSmallMargin" width="100%" selectionBehavior="RowOnly" rowSelectionChange= "onRowSelectionChange" enableColumnReordering="true" >
+        <table:columns>
+            <table:Column sortProperty="WiID" width="10%"  minScreenWidth="Tablet" demandPopin="true">
+                <Label text="Work Item"/>
+                <table:template>
+                <Link id ="ecdID"  text="{
+                 path: 'WiID',
+                 formatter: 'HR.util.Formatter.getPernr'}" press ="onLinkPress"/>
+                </table:template>
+            </table:Column>
+            <table:Column sortProperty="EcdID" width="8%"  minScreenWidth="Tablet" demandPopin="true">
+                <Label text="ECD ID" />
+                <table:template>
+                 <Text text="{EcdID}"/>
+                </table:template>
+            </table:Column>
+            <table:Column sortProperty="Personid" width="16%"  minScreenWidth="Tablet" demandPopin="true">
+                <Label text="EE ID"/>
+                <table:template>
+                 <Text text="{Personid} {EmpName}"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="12%"  sortProperty="StrtOn"  minScreenWidth="Tablet" demandPopin="true">
+                <Label text="Started On"/>
+                <table:template>
+                <Text text="{
+                path: 'StrtOn',
+                formatter: 'HR.util.Formatter.getChangedFormat'}"/>
+                </table:template>
+            </table:Column>
+            <table:Column  width="12%" sortProperty="LastMod"  minScreenWidth="Tablet" demandPopin="true">
+                <Label text="Last Modified"/>
+                <table:template>
+                <Text text="{
+                path: 'LastMod',
+                formatter: 'HR.util.Formatter.getChangedFormat'}"/>
+                </table:template>
+            </table:Column>
+            <table:Column sortProperty="EcdName" width="20%"  minScreenWidth="Tablet" demandPopin="true">
+                <Label text="Form Type"/>
+                <table:template>
+               <Text text="{
+                path: 'EcdName',
+                formatter: 'HR.util.Formatter.getECDName'}"/> 
+                </table:template>
+            </table:Column>
+            <table:Column sortProperty="Status" width="15%"  minScreenWidth="Tablet" demandPopin="true">
+                <Label text="Status"/>
+                <table:template>
+               <Text text="{Status}"/> 
+                </table:template>
+            </table:Column>
+            <table:Column sortProperty="EffctDate" width="16%"  minScreenWidth="Tablet" demandPopin="true">
+                <Label text="Effective Date"/>
+                <table:template>
+               <Text text="{
+                  path: 'EffctDate',
+                  formatter: 'HR.util.Formatter.getNormalDate'}"/>
+                </table:template>
+            </table:Column>
+            
+        </table:columns>
+        </table:Table>
+    			</IconTabFilter>
+    		</items>
+    	    </IconTabBar>
+        </VBox>
+        <footer>
+                <bar>
+                    <contentRight>
+                        <Button id="ecdButton" text="Employee Data Change" type="Emphasized" press="openForm"/>
+                        <Button id="contractButton" text="Contract/Intern Extension"  type="Emphasized" press="openForm"/>
+                        <Button id="terminateButton" text="Termination" type="Emphasized"   press="openForm"/>
+                        <Button id="DetailsButton" text="Details" type="Emphasized" press="openDetailsForm" visible="false"/>
+                        <Button id="OpenButton" text="Open" type="Emphasized" press="openDetailsForm" visible="false"/>
+                        <Button id="CopyButton" text="Copy" type="Emphasized" press="openDetailsForm" visible="false"/>
+                        <Button id="WithdrawButton" text="Withdraw" type="Emphasized" press="openDetailsForm" visible="false"/>
+                        <Button id="DiscardButton" text="Discard Draft" type="Emphasized" press="openDetailsForm" visible="false"/>
+                    </contentRight>
+                </bar>
+                
+            </footer>
+        	</Page>
+</core:View>

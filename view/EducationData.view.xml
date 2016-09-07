@@ -1,0 +1,74 @@
+<core:View xmlns:core="sap.ui.core"  
+        	xmlns:mvc="sap.ui.core.mvc" 
+        	xmlns:l="sap.ui.layout"
+        	xmlns="sap.m" 
+        	xmlns:f="sap.ui.layout.form"
+        	xmlns:custom="HR.controls"
+        	controllerName="HR.view.EducationData" 
+        	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+        	xmlns:html="http://www.w3.org/1999/xhtml">
+    <html:style>
+                .bgColor{
+                    background-color: rgba(128, 128, 128, 0.11);
+                }
+                div[id$="EducationData"] .sapMFlexBox {
+                    margin-left: auto !important;
+                    margin-right: auto !important;
+                    max-width: 1024px;
+                }
+                
+        	    div[id$="EducationData"] .sapMPanelContent {
+                    padding: 0rem;
+                }
+                div[id$="EducationData"] .sapMPanelBG{
+        	        background-color: rgba(255,255,255,0.6);
+        	    }
+        	    @media screen and (min-width: 1354px) {
+                    div[id$="EducationData"] .header {
+                        margin-top:20px;
+                    }
+                }
+                div[id$="EducationData"] .sapMListTblCell  {
+                    border-bottom: none !important;
+                    border-top: none !important;
+                }
+                div[id$="educationDetails"]   {
+                  background-color: rgba(128, 128, 128, 0.11);
+                }
+                div[id$="editDetails"]   {
+                  background-color: rgba(128, 128, 128, 0.11);
+                }
+                div[id$="showDetails"]   {
+                  background-color: rgba(128, 128, 128, 0.11);
+                }
+                div[id$="InstitutionsList"] .sapMList {
+                    margin-top:10px;  
+     	        }
+        
+      </html:style>
+      
+        	
+    <Page id="EducationData"   title="Education Data" showHeader="true">
+            <VBox vAlign="Middle" id="headerContent">
+            <custom:Header 
+        	        id                  = "header"
+        	        name                = "{/d/Ename}"
+        	        title               = "{/d/Jobtitle}"
+        	        employeeID          = "{/d/Pernr}"
+                />
+            </VBox>
+            <content>
+            <VBox vAlign="Middle" id="educationForm"></VBox>
+             </content>
+        	<footer>
+                <bar>
+                    <contentRight>
+                        <Button text="Approve" type="Accept"  id="approve" press="onApprove" />
+                        <Button text="Reject" type="Reject" id="reject" press="onReject"/>
+                        <Button text="Ok" type="Emphasized" id="ok" press="back" />
+                    </contentRight>
+                </bar>
+                
+            </footer>
+        	</Page>
+</core:View>

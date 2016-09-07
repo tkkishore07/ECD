@@ -1,0 +1,562 @@
+<core:View xmlns:core="sap.ui.core"  
+        	xmlns:mvc="sap.ui.core.mvc" 
+        	xmlns:l="sap.ui.layout"
+        	xmlns="sap.m" 
+        	xmlns:custom="HR.controls"
+        	controllerName="HR.view.EmployeeDataChangeDetails" 
+        	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+        	xmlns:html="http://www.w3.org/1999/xhtml">
+    <html:style>
+           div[id$="EmployeeDataChangeDetails"] .sapMFlexBox {
+                    margin-left: auto !important;
+                    margin-right: auto !important;
+                    max-width: 1024px;
+                }
+                
+        	    div[id$="EmployeeDataChangeDetails"] .sapMPanelContent {
+                    padding: 0rem;
+                }
+                div[id$="EmployeeDataChangeDetails"] .sapMPanelBG{
+        	        background-color: rgba(255,255,255,0.6);
+        	    }
+        	    @media screen and (min-width: 1354px) {
+                    div[id$="EmployeeDataChangeDetails"] .header {
+                        margin-top:20px;
+                    }
+                }
+                div[id$="EmployeeDataChangeDetails"] .sapMListTblCell  {
+                    border-bottom: none !important;
+                }
+      
+      </html:style>
+      
+        	
+    <Page id="EmployeeDataChangeDetails" title="{EcdID}" showHeader="true">
+        <VBox>
+        
+                <custom:Header 
+        	        id                  = "header"
+        	        name                = "{/d/I0001Ename}"
+                    title               = "{/d/I0001Ptext}"
+                    employeeID          = "{/d/PersonId}"
+                    showMoreDetails     = "true"
+                    manager             = "{/d/ManagerName}"
+                    workerType          = "{/d/I0001Persg} - {/d/I0001PersgName}"
+                    costCenter          = "{/d/I0001Kostl} - {/d/I0001KostlName}"
+                    countryLegalEntity  = "{/d/I0001Werks} {/d/I0001WerksName}"
+                    officeLocation      = "{/d/I0001Btrtl} {/d/I0001BtrtlName}"
+                   />
+                <Table 
+                    id="edits-ecd"
+                    class= "sapUiTinyMarginBottom sapUiSizeCompact"
+                    editable="false"
+                    inset="false" backgroundDesign="Transparent" >
+                     
+                <headerToolbar>
+                    <Toolbar>
+                        <Label text="Edits" level="H3" />
+                    </Toolbar>
+                </headerToolbar>
+                <columns>
+                    <Column
+                        minScreenWidth="Tablet"
+                        demandPopin="true">
+                        <Text text="Field" />
+                    </Column>
+                    <Column
+                        minScreenWidth="Tablet"
+                        demandPopin="true" >
+                        <Text text="Current Value" />
+                    </Column>
+                    <Column
+                        minScreenWidth="Tablet"
+                        demandPopin="true">
+                    <Text text="Proposed Value" />
+                    </Column>
+                    </columns>
+                    <items>
+                    <ColumnListItem vAlign="Middle" id="EffectiveDate">
+                            <cells> 
+                            <VBox>        
+                            <ObjectStatus text="Effective Date"/>
+                            </VBox>  
+                            <VBox>        
+                            <ObjectStatus id = "date-old" text=""/>
+                            </VBox>    
+                            
+                            <VBox> 
+                            <ObjectStatus  text="{
+                                path: '/d/EffectiveDate',
+                                formatter: 'HR.util.Formatter.getNormalDate'
+                            }"/>
+                            </VBox> 
+                            </cells>
+                          </ColumnListItem>
+                          
+                        <ColumnListItem vAlign="Middle" id="ManagerField">
+                            <cells> 
+                            <VBox>        
+                            <ObjectStatus text="Manager"/>
+                            </VBox>  
+                            <VBox>        
+                            <ObjectStatus id = "manager-old" text="{/d/ManagerPersonIdCurr} {/d/ManagerNameCurr}"/>
+                            </VBox>    
+                            
+                            <VBox>        
+                            <ObjectStatus id="manager-new" text="{/d/ManagerPersonIdNew} {/d/ManagerNameNew}"/>
+                            </VBox> 
+                            </cells>
+                          </ColumnListItem>
+                          
+                          <ColumnListItem vAlign="Middle" id="PeopleManagerField">
+                            
+                            <cells> 
+                             <VBox>        
+                            <ObjectStatus text="Becoming a People Manager"/>
+                            </VBox>  
+                            <VBox>        
+                            <ObjectStatus id = "peoplemanager-old" text="{/d/PeopleMngrCurr}"/>
+                            </VBox>    
+                            <VBox>        
+                            <ObjectStatus  id = "peoplemanager-new" text="{path: '/d/PeopleMngrNew' , formatter:'HR.util.Formatter.becomingAPeopleManagerNew' }"/>
+                            </VBox> 
+                            </cells>
+                        </ColumnListItem>
+                         <ColumnListItem vAlign="Middle" id="CostCenterField">
+                            <cells> 
+                            <VBox>        
+                            <ObjectStatus text="Cost Center"/>
+                            </VBox>  
+                            <VBox>        
+                            <ObjectStatus id="costCenter-old" text="{/d/I0001KostlCurr} {/d/I0001KostlNameCurr}"/>
+                            </VBox>    
+                            
+                            <VBox>        
+                            <ObjectStatus id="costCenter-new" text="{/d/I0001KostlNew} {/d/I0001KostlNameNew}"/>
+                            </VBox> 
+                            </cells>
+                            </ColumnListItem>
+                         <ColumnListItem vAlign="Middle" id="OfficeField">
+                            <cells> 
+                            <VBox>        
+                            <ObjectStatus text="Office Location"/>
+                            </VBox>  
+                            <VBox>        
+                            <ObjectStatus id="officeLocation-old"  text="{/d/I0001BtrtlCurr} {/d/I0001BtrtlNameCurr}"/>
+                            </VBox>    
+                            
+                            <VBox>        
+                            <ObjectStatus  id="officeLocation-new" text="{/d/I0001BtrtlNew} {/d/I0001BtrtlNameNew}"/>
+                            </VBox> 
+                            </cells>
+                        </ColumnListItem>
+                        
+                        <ColumnListItem vAlign="Middle" id="JobCodeField" >
+                            <cells> 
+                            <VBox>        
+                            <ObjectStatus text="Job Code"/>
+                            </VBox>  
+                            <VBox>        
+                            <ObjectStatus  id="jobCode-old" text="{/d/I0001StellCurr} {/d/I0001ShortCurr}"/>
+                            </VBox>    
+                            
+                            <VBox>        
+                            <ObjectStatus  id="jobCode-new" text="{/d/I0001StellNew} {/d/I0001ShortNew}"/>
+                            </VBox> 
+                            </cells>
+                        </ColumnListItem>
+                        
+                        <ColumnListItem vAlign="Middle" id="JobTitleField">
+                            <cells> 
+                            <VBox>        
+                            <ObjectStatus text="Job Title"/>
+                            </VBox>  
+                            <VBox>        
+                            <ObjectStatus  id="jobTitle-old" text="{/d/I9002ZjobtitleCurr}"/>
+                            </VBox>    
+                            
+                            <VBox>        
+                            <ObjectStatus  id="jobTitle-new" text="{/d/I9002ZjobtitleNew}"/>
+                            </VBox> 
+                            </cells>
+                        </ColumnListItem>
+                        
+                          <ColumnListItem vAlign="Middle" id="PositionTitleField">
+                            <cells> 
+                             <VBox>        
+                            <ObjectStatus text="Position Title"/>
+                            </VBox>  
+                            <VBox>        
+                            <ObjectStatus  id="positionTitle-old" text="{/d/I0001PtextCurr}"/>
+                            </VBox>    
+                            
+                            <VBox>        
+                            <ObjectStatus  id="positionTitle-new" text="{/d/I0001PtextNew}"/>
+                            </VBox> 
+                            </cells>
+                        </ColumnListItem>
+                        
+                          <ColumnListItem vAlign="Middle" id="JobLevelField">
+                            <cells> 
+                             <VBox>        
+                            <ObjectStatus text="Job Level"/>
+                            </VBox>  
+                            <VBox>        
+                            <ObjectStatus  id="jobLevel-old"  text="{/d/I1051JcodeNameCurr}"/>
+                            </VBox>    
+                            
+                            <VBox>        
+                            <ObjectStatus  id="jobLevel-new" text="{/d/I1051JcodeNameNew}"/>
+                            </VBox> 
+                            </cells>
+                        </ColumnListItem>
+                        
+                          <ColumnListItem vAlign="Middle" id="ManagerLevelField">
+                            <cells> 
+                            <VBox>        
+                            <ObjectStatus text="Signature Authority"/>
+                            </VBox>  
+                            <VBox>        
+                            <ObjectStatus  id="managerLevel-old" text="{/d/I1010HilfmCurr} {/d/I1010HilfmDescrCurr}"/>
+                            </VBox>    
+                            
+                            <VBox>        
+                            <ObjectStatus  id="managerLevel-new"  text="{/d/I1010HilfmNew} {/d/I1010HilfmDescrNew}"/>
+                            </VBox> 
+                            </cells>
+                        </ColumnListItem>
+                        
+                         <ColumnListItem vAlign="Middle" id="AnnSalaryField">
+                            <cells> 
+                            <VBox>        
+                            <ObjectStatus text="Annual Salary"/>
+                            </VBox>  
+                            <VBox>        
+                            <ObjectStatus  id="annSal-old"  text="{
+                               path: '/d/CurrAnsal',
+                               formatter: 'HR.util.Formatter.getMoney'
+                               } {/d/I0008Waers}"/>
+                            </VBox>    
+                            
+                            <VBox>        
+                            <ObjectStatus  id="annSal-new"  text="{
+                               path: '/d/NewAnsal',
+                               formatter: 'HR.util.Formatter.getMoney'
+                               } {/d/I0008Waers}"/>
+                            </VBox> 
+                            </cells>
+                        </ColumnListItem>
+                        
+                        
+                          <ColumnListItem vAlign="Middle" id="TargetCommField">
+                            <cells> 
+                             <VBox>        
+                            <ObjectStatus text="Target Commission"/>
+                            </VBox>  
+                            <VBox>        
+                            <ObjectStatus  id="targetComm-old" text="{
+                                   path: '/d/CurrCommision',
+                                   formatter: 'HR.util.Formatter.getMoney'
+                                   } {/d/I0008Waers}"/>
+                            </VBox>    
+                            
+                            <VBox>        
+                            <ObjectStatus  id="targetComm-new" text="{
+                                   path: '/d/NewCommision',
+                                   formatter: 'HR.util.Formatter.getMoney'
+                                   } {/d/I0008Waers}"/>
+                            </VBox> 
+                            </cells>
+                        </ColumnListItem>
+                        
+                        
+                          <ColumnListItem vAlign="Middle" id="RSUField">
+                            <cells> 
+                            <VBox>        
+                            <ObjectStatus text="RSU"/>
+                            </VBox>  
+                            <VBox>        
+                            <ObjectStatus  id="rsu-old" text="Check with HRBP"/>
+                            </VBox>    
+                            
+                            <VBox>        
+                            <ObjectStatus  id="rsu-new" text="{/d/I0761RsuNew}"/>
+                            </VBox> 
+                            </cells>
+                        </ColumnListItem>
+                        
+                          <ColumnListItem vAlign="Middle" id="StockOptionField">
+                            <cells> 
+                             <VBox>        
+                            <ObjectStatus text="Stock Option"/>
+                            </VBox>  
+                            <VBox>        
+                            <ObjectStatus  id="stockOption-old" text="Check with HRBP"/>
+                            </VBox>    
+                            
+                            <VBox>        
+                            <ObjectStatus   id="stockOption-new" text="{/d/I0761StockNew}"/>
+                            </VBox> 
+                            </cells>
+                        </ColumnListItem>
+                        
+                          <ColumnListItem vAlign="Middle"  id="LeaderField" >
+                            <cells> 
+                            <VBox>        
+                            <ObjectStatus text="Leader"/>
+                            </VBox>  
+                            <VBox>        
+                            <ObjectStatus  id="leader-old" text="{/d/I0001ZzldridCurr} {/d/I0001ZzldridNameCurr}"/>
+                            </VBox>    
+                            
+                            <VBox>        
+                            <ObjectStatus  id="leader-new" text="{/d/I0001ZzldridNew} {/d/I0001ZzldridNameNew}"/>
+                            </VBox> 
+                            </cells>
+                        </ColumnListItem>
+                        
+                          <ColumnListItem id="LaborClassField">
+                            <cells> 
+                             <VBox>        
+                            <ObjectStatus text="Labor Classification"/>
+                            </VBox>  
+                            <VBox>        
+                            <ObjectStatus  id="labourClass-old"  text=""/>
+                            </VBox>    
+                            
+                            <VBox>        
+                            <ObjectStatus  id="labourClass-new" text=""/>
+                            </VBox> 
+                            </cells>
+                        </ColumnListItem>
+                        
+                    </items>
+                        
+            </Table>  
+                  
+                <Table 
+                    id="edits-contract"
+                    class= "sapUiTinyMarginBottom sapUiSizeCompact"
+                    editable="false"
+                    inset="false" backgroundDesign="Transparent" >
+                     
+                <headerToolbar>
+                    <Toolbar>
+                        <Label text="Edits" level="H3" />
+                    </Toolbar>
+                </headerToolbar>
+                <columns>
+                    <Column
+                        minScreenWidth="Tablet"
+                        demandPopin="true">
+                        <Text text="Field" />
+                    </Column>
+                    <Column
+                        minScreenWidth="Tablet"
+                        demandPopin="true">
+                        <Text text="Current Value" />
+                    </Column>
+                    <Column
+                        minScreenWidth="Tablet"
+                        demandPopin="true">
+                    <Text text="Proposed Value" />
+                    </Column>
+                    </columns> 
+                    <items>
+                <ColumnListItem vAlign="Middle" id="EffectiveDateField">
+                            <cells> 
+                            <VBox>        
+                            <ObjectStatus text="Effective Date"/>
+                            </VBox>  
+                            <VBox>        
+                            <ObjectStatus  text=""/>
+                            </VBox>    
+                            
+                            <VBox>        
+                            <ObjectStatus  text="{
+                                path: '/d/EffectiveDate',
+                                formatter: 'HR.util.Formatter.getNormalDate'
+                            }"/>
+                            </VBox> 
+                            </cells>
+                          </ColumnListItem>    
+                          <ColumnListItem vAlign="Middle" id="ContractTypeField">
+                            <cells> 
+                            <VBox>        
+                            <ObjectStatus text="Contract Type"/>
+                            </VBox>  
+                            <VBox>        
+                            <ObjectStatus text="{/d/I0016CttypCurr} {I0016CttypDescrCurr}"/>
+                            </VBox>    
+                            
+                            <VBox>        
+                            <ObjectStatus  text="{/d/I0016CttypNew} {I0016CttypDescrNew}"/>
+                            </VBox> 
+                            </cells>
+                          </ColumnListItem>   
+                           <ColumnListItem vAlign="Middle" id="ContractEndDateField">
+                            <cells> 
+                            <VBox>        
+                            <ObjectStatus text="Contract End Date"/>
+                            </VBox>  
+                            <VBox>        
+                            <ObjectStatus  text="{
+                               path: '/d/I0016CtedtCurr',
+                               formatter: 'HR.util.Formatter.getNormalDate'
+                               }"/>
+                            </VBox>     
+                            
+                            <VBox>        
+                          <ObjectStatus  text="{
+                               path: '/d/I0016CtedtNew',
+                               formatter: 'HR.util.Formatter.getNormalDate'
+                               }"/>
+                            </VBox> 
+                            </cells>
+                          </ColumnListItem>  
+                </items>
+                </Table>
+                <Table 
+                    id="edits-termination"
+                    class= "sapUiTinyMarginBottom sapUiSizeCompact"
+                    editable="false"
+                    inset="false" backgroundDesign="Transparent" >
+                     
+                <headerToolbar>
+                    <Toolbar>
+                        <Label text="Edits" level="H3" />
+                    </Toolbar>
+                </headerToolbar>
+                <columns>
+                    <Column
+                        minScreenWidth="Tablet"
+                        demandPopin="true">
+                        <Text text="Field" />
+                    </Column>
+                    <Column
+                        minScreenWidth="Tablet"
+                        demandPopin="true">
+                    <Text text="Proposed Value" />
+                    </Column>
+                    </columns> 
+                    <items>
+                <ColumnListItem vAlign="Middle" id="TerminationReasonField">
+                            <cells> 
+                            <VBox>        
+                            <ObjectStatus text="Termination Reason"/>
+                            </VBox>  
+                            <VBox>        
+                            <ObjectStatus  text="{/d/Massg} {/d/MassgDescr}"/>
+                            </VBox>    
+                            </cells>
+                          </ColumnListItem>    
+                          <ColumnListItem vAlign="Middle" id="TerminationDateField">
+                            <cells> 
+                            <VBox>        
+                            <ObjectStatus text="Termination Date"/>
+                            </VBox>  
+                            <VBox>        
+                            <ObjectStatus text="{
+                            path:'/d/TermDate',
+                            formatter: 'HR.util.Formatter.getNormalDate'}"/>
+                            </VBox>    
+                            </cells>
+                          </ColumnListItem>   
+                           <ColumnListItem vAlign="Middle" id="LastDayWorkedField">
+                            <cells> 
+                            <VBox>        
+                            <ObjectStatus text="Last Day Worked"/>
+                            </VBox>  
+                            <VBox>        
+                            <ObjectStatus  text="{
+                            path:'/d/LastDayWorked',
+                            formatter: 'HR.util.Formatter.getNormalDate'}"/>
+                            </VBox>     
+                            </cells>
+                          </ColumnListItem>  
+                           <ColumnListItem vAlign="Middle" id="RehireEligibilityField">
+                            <cells> 
+                            <VBox>        
+                            <ObjectStatus text="Rehire Eligibility"/>
+                            </VBox>  
+                            <VBox>        
+                            <ObjectStatus  text="{/d/RehireEligibility}"/>
+                            </VBox>     
+                            </cells>
+                          </ColumnListItem>  
+                           <ColumnListItem vAlign="Middle" id="NotificationDateField">
+                            <cells> 
+                            <VBox>        
+                            <ObjectStatus text="Israel Term Notification Date"/>
+                            </VBox>  
+                            <VBox>        
+                            <ObjectStatus  text="{
+                            path:'/d/IlNoticeDate',
+                            formatter: 'HR.util.Formatter.getNormalDate'}"/>
+                            </VBox>     
+                            </cells>
+                          </ColumnListItem>  
+                </items>
+                </Table>
+            <Table id="processSteps"
+                     inset="false"
+                     visible="false"
+                     backgroundDesign="Transparent"
+                     class= "sapUiSizeCompact"
+                      items="{/d/ZSHOWAPPROVALSet/results}">
+                     
+                <headerToolbar>
+                <Toolbar>
+                    <Label text="Process Steps" level="H3" />
+                 </Toolbar>
+                </headerToolbar>
+                <columns>
+                        <Column mergeDuplicates="true" width="20%">
+                        <Text text="Step" />
+                      </Column>
+                      <Column width="25%">
+                        <Text text="Processor"/>
+                      </Column>
+                      <Column
+                        minScreenWidth="Tablet" width="25%"
+                        demandPopin="true">
+                        <Text text="Date" />
+                      </Column>
+                      <Column
+                        minScreenWidth="Tablet"
+                        demandPopin="true" width="25%">
+                        <Text text="Comments" width="30%" />
+                      </Column>
+                </columns>
+                 <items>
+                        <ColumnListItem>
+                            <cells>
+                             <Text
+                                text="{path: 'ApprovalLevel',
+                                formatter: 'HR.util.Formatter.toInteger'}" />
+                              <Text
+                                text="{Approver} {ApproverName}" />
+                                 <Text
+                                    text="{path: 'DateTime',
+                                    formatter: 'HR.util.Formatter.getChangedFormat'}" />
+                                 <Text 
+                                    text="{path: 'ApproverComments',
+                                    formatter: 'HR.util.Formatter.newLineCharacter'}" />
+                             
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+            </Table>  
+                    
+            </VBox>
+        	
+        	<footer>
+                <bar>
+                    <contentRight>
+                        <Button text="Ok" type="Emphasized" press="goBack" />
+                    </contentRight>
+                </bar>
+                
+            </footer>
+        	</Page>
+</core:View>

@@ -1,0 +1,333 @@
+<core:View xmlns:core="sap.ui.core" 
+    controllerName="HR.view.StatusReport" 
+	xmlns:mvc="sap.ui.core.mvc" 
+	xmlns:table="sap.ui.table"
+	xmlns:commons ="sap.ui.commons"
+	xmlns="sap.m" 
+	xmlns:html="http://www.w3.org/1999/xhtml"	
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<html:style>	  .
+        div[id$="StatusReport"] .sapMList {
+        	margin-top: 5rem !important;
+        	padding-left: 2rem !important;
+        	padding-right: 2rem !important;
+    	}
+    <!--	HRBP Search Styling-->
+    	div[id$="HRBPSearch-dialog"] .marginPersonData {
+           margin-left:10px;  
+           margin-top:3px !important;  
+        }
+    	div[id$="HRBPSearch-dialog"] .sapMLabelMaxWidth {
+            font-size: 0.75rem !important;
+        }
+        div[id$="HRBPSearch-dialog"] .sapUiFixFlexFlexible{
+            overflow:visible !important;
+        }
+        div[id$="HRBPSearch-dialog"] .sapUiFixFlexFixed{
+            height:80px !important;
+        }
+        div[id$="HRBPSearch-dialog"] .sapMImg{
+            margin-top:3px !important;
+            margin-left:5px !important;
+            border-radius:3px !important;
+            margin-right: 10px !important;
+        }
+        div[id$="HRBPSearch-dialog"] .sapMLIBContent{
+            padding: 5px !important;
+        }
+        div[id$="HRBPSearch-dialog"] .sapMGrowingListTrigger{
+            border-top: none !important;
+        }    
+        
+       <!-- Manager Search styling-->
+        div[id$="ManagerSearch-dialog"] .marginPersonData {
+           margin-left:10px;  
+           margin-top:3px !important;  
+        }
+        div[id$="ManagerSearch-dialog"] .sapMLabelMaxWidth {
+            font-size: 0.75rem !important;
+        }
+        div[id$="ManagerSearch-dialog"] .sapUiFixFlexFlexible{
+            overflow:visible !important;
+        }
+        div[id$="ManagerSearch-dialog"] .sapUiFixFlexFixed{
+            height:80px !important;
+        }
+        div[id$="ManagerSearch-dialog"] .sapMImg{
+            margin-top:3px !important;
+            margin-left:5px !important;
+            border-radius:3px !important;
+            margin-right: 10px !important;
+        }
+        div[id$="ManagerSearch-dialog"] .sapMLIBContent{
+            padding: 5px !important;
+        }
+        div[id$="ManagerSearch-dialog"] .sapMGrowingListTrigger{
+            border-top: none !important;
+        }    	
+        <!-- Affected Emp Search styling-->
+        div[id$="AffectedEmp-dialog"] .marginPersonData {
+           margin-left:10px;  
+           margin-top:3px !important;  
+        }
+        div[id$="AffectedEmp-dialog"] .sapMLabelMaxWidth {
+            font-size: 0.75rem !important;
+        }
+        div[id$="AffectedEmp-dialog"] .sapUiFixFlexFlexible{
+            overflow:visible !important;
+        }
+        div[id$="AffectedEmp-dialog"] .sapUiFixFlexFixed{
+            height:80px !important;
+        }
+        div[id$="AffectedEmp-dialog"] .sapMImg{
+            margin-top:3px !important;
+            margin-left:5px !important;
+            border-radius:3px !important;
+            margin-right: 10px !important;
+        }
+        div[id$="AffectedEmp-dialog"] .sapMLIBContent{
+            padding: 5px !important;
+        }
+        div[id$="AffectedEmp-dialog"] .sapMGrowingListTrigger{
+            border-top: none !important;
+        }    
+    	
+    	div[id$="formTable"] .sapMLIBShowSeparator>td {  
+          border-top: none !important;  
+          border-bottom: none !important;  
+        } 
+        div[id$="statusReports"] { cursor: pointer; cursor: hand; }
+	</html:style>
+	
+    <Page title="{i18n>statusReportTitle}" id="StatusReport">
+	    <content> 
+	     <Table id="formTable" inset="false" backgroundDesign="Transparent" class="sapUiSizeCompact"> 
+            <columns>
+              <Column width="50%"/>
+              <Column width="50%" minScreenWidth="Tablet" demandPopin="true"/>
+            </columns>
+            <items>
+              <ColumnListItem> 
+                <cells>
+                    <Table backgroundDesign="Transparent"><columns><Column width="35%"/><Column width="10%"/><Column width="45%"/><Column width="10%"/></columns>
+                    <ColumnListItem>
+                        <cells>
+                            <Text text="Submitted Date From"/>
+                            <Button icon="sap-icon://message-error" id="submitFromDate-error" type="Reject" press="error" app:id="submitFromDate"/>
+                            <DatePicker id="submitFromDate" displayFormat="long" valueFormat= "long" change="validations" placeholder="mm-dd-yyyy"/>
+                            <Text/>
+                        </cells>
+                    </ColumnListItem>
+                    </Table>
+                    <Table backgroundDesign="Transparent"><columns><Column width="35%"/><Column width="10%"/><Column width="45%"/><Column width="10%"/></columns>
+                    <ColumnListItem>
+                        <cells>
+                            <Text text="Submitted Date To"/> 
+                            <Button icon="sap-icon://message-error" id="submitToDate-error" type="Reject" press="error" app:id="submitToDate"/>
+                            <DatePicker id="submitToDate" change="validations" displayFormat="long" valueFormat= "long" placeholder="mm-dd-yyyy"/>
+                            <Text/>
+                        </cells>
+                    </ColumnListItem>
+                    </Table>
+                </cells>
+              </ColumnListItem>
+              <ColumnListItem>
+                <cells>
+                    <Table backgroundDesign="Transparent"><columns><Column width="35%"/><Column width="10%"/><Column width="45%"/><Column width="10%"/></columns>
+                    <ColumnListItem>
+                        <cells>
+                            <Text text="Effective Date From"/> 
+                            <Button icon="sap-icon://message-error" id="effectiveFromDate-error" type="Reject" press="error" app:id="effectiveFromDate"/>
+                            <DatePicker id="effectiveFromDate" displayFormat="long" valueFormat= "long" change="validations" placeholder="mm-dd-yyyy"/>
+                            <Button icon="sap-icon://sys-cancel-2" type="Transparent" id="effectiveFromDate-cancel" press="resetField" visible="false"/> 
+                        </cells>
+                    </ColumnListItem>
+                    </Table>
+                    <Table backgroundDesign="Transparent"><columns><Column width="35%"/><Column width="10%"/><Column width="45%"/><Column width="10%"/></columns>
+                    <ColumnListItem>
+                        <cells>
+                            <Text text="Effective Date To"/> 
+                            <Button icon="sap-icon://message-error" id="effectiveToDate-error" type="Reject" press="error" app:id="effectiveToDate"/>
+                            <DatePicker id="effectiveToDate" change="validations" displayFormat="long" valueFormat= "long" placeholder="mm-dd-yyyy"/>
+                            <Button icon="sap-icon://sys-cancel-2" type="Transparent" id="effectiveToDate-cancel"  press="resetField" visible="false"/> 
+                        </cells>
+                    </ColumnListItem>
+                    </Table>
+                </cells>
+              </ColumnListItem>
+              <ColumnListItem>
+                <cells>
+                    <Table backgroundDesign="Transparent"><columns><Column width="35%"/><Column width="10%"/><Column width="45%"/><Column width="10%"/></columns>
+                    <ColumnListItem>
+                        <cells>
+                            <Text text="Affected Employee"/> 
+                            <Text/>
+                            <Input id="affectedEmp" showValueHelp="true" valueHelpOnly="true"  valueHelpRequest="_affectedEmpSearchPopup"/>
+                            <Button icon="sap-icon://sys-cancel-2" type="Transparent" id="affectedEmp-cancel"  press="resetField"  visible="false"/>  
+                        </cells>
+                    </ColumnListItem>
+                    </Table>
+                    <Table backgroundDesign="Transparent"><columns><Column width="35%"/><Column width="10%"/><Column width="45%"/><Column width="10%"/></columns>
+                    <ColumnListItem>
+                        <cells>
+                            <Text text="Manager"/>
+                            <Text/>
+                            <Input id="manager" showValueHelp="true" valueHelpOnly="true" valueHelpRequest="_managerSearchPopup"/>
+                            <Button icon="sap-icon://sys-cancel-2" type="Transparent" id="manager-cancel"  press="resetField"  visible="false"/>
+                        </cells>
+                    </ColumnListItem>
+                    </Table>
+                </cells>
+              </ColumnListItem>
+              <ColumnListItem>
+                <cells>
+                    <Table backgroundDesign="Transparent"><columns><Column width="35%"/><Column width="10%"/><Column width="45%"/><Column width="10%"/></columns>
+                    <ColumnListItem>
+                        <cells>
+                            <Text text="Process Status"/> 
+                            <Text/>
+                            <Select width="100%" id="processStatus" items="{/d/results}">
+                             <core:Item key="{Status}" text="{Description}" />
+                            </Select>
+                            <Text/>
+                        </cells>
+                    </ColumnListItem>
+                    </Table>
+                    <Table backgroundDesign="Transparent"><columns><Column width="35%"/><Column width="10%"/><Column width="45%"/><Column  width="10%"/></columns>
+                    <ColumnListItem>
+                        <cells>
+                            <Text text="HRBP"/> 
+                            <Text/>
+                            <Input id="HRBP" showValueHelp="true" valueHelpOnly="true"  valueHelpRequest="_hrbpSearchPopup"/>
+                            <Button icon="sap-icon://sys-cancel-2" type="Transparent" id="HRBP-cancel"  press="resetField" visible="false"/>
+                        </cells>
+                    </ColumnListItem>
+                    </Table>
+                </cells>
+              </ColumnListItem>
+                <ColumnListItem>
+                <cells>
+                
+                    <Table backgroundDesign="Transparent"><columns><Column width="35%"/><Column width="10%"/><Column width="45%"/><Column width="10%"/></columns>
+                    <ColumnListItem>
+                        <cells>
+                            <Text text="Process Name"/> 
+                            <Text/>
+                            <Select id ="processName" width="100%">
+                                <core:Item id="blank" key="" text="All" />
+                                <core:Item id="ecdProcess" key="{i18n>ecdProcess}" text="{i18n>EDCValue}" />
+                                <core:Item id="contractProcess" key="{i18n>contractProcess}" text="{i18n>ContractExtensionValue}" />
+                                <core:Item id="terminateProcess" key="{i18n>terminateProcess}" text="{i18n>TerminationValue}" />
+                                <core:Item id="educationProcess" key="{i18n>educationProcess}" text="{i18n>EducationValue}" />
+                            </Select>
+                            <Text/>
+                        </cells>
+                    </ColumnListItem>
+                    </Table>
+                    <Table backgroundDesign="Transparent"><columns><Column width="35%"/><Column width="10%"/><Column width="45%"/><Column width="10%"/></columns>
+                    <ColumnListItem>
+                        <cells>
+                            <CheckBox id="selfInvolved" text="Self Involved" selected ="true"/>
+                            <Text/>
+                            <CheckBox id="directReportee" text="Direct Report [For Managers only]" />
+                            <Text/>
+                        </cells>
+                    </ColumnListItem>
+                    </Table>
+                </cells>
+              </ColumnListItem>
+            </items>
+        </Table>
+        
+        <Table backgroundDesign="Transparent" width="100%">
+        <columns><Column/></columns>
+                <ColumnListItem>
+                    <cells>
+                        <HBox>
+                            <Button type="Emphasized" text="Search" id ="search" press="onSearch"/>
+                            <Button type="Default" text="Reset" id ="reset" press="onReset"/>
+                        </HBox>
+                    </cells>
+                </ColumnListItem>
+        </Table>
+        <table:Table id="statusReports" table:selectionMode ="Single" navigationMode="Paginator" class="sapUiSizeCompact" width="100%" selectionBehavior="RowOnly" rowSelectionChange= "onRowSelectionChange" enableColumnReordering="true" >
+        <table:columns>
+            <table:Column sortProperty="WiID" width="10%">
+                <Label text="Work Item"/>
+                <table:template>
+                 <Link id ="workItemId" text="{
+                 path: 'WiID',
+                 formatter: 'HR.util.Formatter.getPernr'}" press ="onLinkPress"/>
+                </table:template>
+            </table:Column>
+             <table:Column sortProperty="EcdID" width="7%">
+                <Label text="ECD ID" />
+                <table:template>
+                 <Text text="{EcdID}"/>
+                </table:template>
+            </table:Column>
+            <table:Column sortProperty="PersonID" width="20%">
+                <Label text="EE ID"/>
+                <table:template>
+                 <Text text="{PersonID} {EmpName}"/>
+                </table:template>
+            </table:Column>
+            <table:Column sortProperty="InitDateFrom" width="12%">
+                <Label text="Started On"/>
+                <table:template>
+                <Text text="{
+                    path: 'InitDateFrom',
+                    formatter: 'HR.util.Formatter.getNormalDate'}"/>
+                </table:template>
+            </table:Column>
+            <table:Column sortProperty="EcdProcName" width="18%">
+                <Label text="Form Type"/>
+                <table:template>
+               <Text text="{
+                path: 'EcdProcName',
+                formatter: 'HR.util.Formatter.getECDName'}"/> 
+                </table:template>
+            </table:Column>
+            <table:Column sortProperty="Status" width="20%">
+                <Label text="Status"/>
+                <table:template>
+               <Text text="{Status}"/> 
+                </table:template>
+            </table:Column>
+             <table:Column sortProperty="EffectiveDate" width="13%">
+                <Label text="Effective Date"/>
+                <table:template>
+               <Text text="{
+                  path: 'EffectiveDate',
+                  formatter: 'HR.util.Formatter.getNormalDate'}"/>
+                </table:template>
+            </table:Column>
+            
+        </table:columns>
+        </table:Table>
+        <Table id="totalRecordsTable" inset="false" backgroundDesign="Transparent" class="sapUiSizeCompact" visible="false"> 
+            <columns>
+              <Column width="100%" hAlign="Center"/>
+            </columns>
+            <items>
+            <ColumnListItem>  
+                <cells>
+                <Label id="totalRecords" text="" />
+                </cells>
+            </ColumnListItem>
+            </items>
+             </Table>
+       </content>
+	   <footer>
+	    <Toolbar>
+        <ToolbarSpacer/>
+        <Button id="ShowDetailsButton" type="Default" text="Details" press="showDetails" visible="false"/>
+        <Button id="WithdrawButton" type="Default"  text="Withdraw" press="onWithdrawOrForward" visible="false"/>
+        <Button id="ForwardButton" type="Default"  text="Forward" press="onWithdrawOrForward" visible="false"/>
+        <Button id="DownloadButton" type="Default"  text="Download as Excel" press="onDownload" visible="false"/>
+        </Toolbar>
+	   </footer>
+	   
+	   
+	</Page>
+</core:View>

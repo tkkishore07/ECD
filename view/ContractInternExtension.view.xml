@@ -1,0 +1,149 @@
+<core:View xmlns:core="sap.ui.core"  
+        	xmlns:mvc="sap.ui.core.mvc" 
+        	xmlns:l="sap.ui.layout"
+        	xmlns="sap.m" 
+        	xmlns:custom="HR.controls"
+        	controllerName="HR.view.ContractInternExtension" 
+        	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+        	xmlns:html="http://www.w3.org/1999/xhtml">
+        	<html:style>
+                div[id$="ContractInternExtension"] .sapMFlexBox {
+                    margin-left: auto !important;
+                    margin-right: auto !important;
+                    max-width: 1024px;
+                }
+        	    @media screen and (min-width: 1354px) {
+                    div[id$="ContractInternExtension"] .header {
+                        margin-top:20px;
+                        margin-bottom: 20px;
+                    }
+                }
+                div[id$="ContractInternExtension"] .sapMListShowSeparatorsAll .sapMLIBShowSeparator:last-child>td{
+                    border-bottom: none !important;
+                }
+             </html:style>  
+        	<Page  
+        	    showNavButton="{device>/isPhone}"
+        	    navButtonPress="handleNavButtonPress"
+        	    id="ContractInternExtension" 
+        	    title="{i18n>contractExtensionTitle}" >
+     
+        	<VBox>
+        	<custom:Header 
+        	        id                  = "header"
+        	        name                = "{/d/I0001Ename}"
+                    title               = "{/d/I0001Ptext}"
+                    employeeID          = "{/d/PersonId}"
+                    showMoreDetails     = "true"
+                    manager             = "{/d/ManagerName}"
+                    workerType          = "{/d/I0001Persg} - {/d/I0001PersgName}"
+                    costCenter          = "{/d/I0001Kostl} - {/d/I0001KostlName}"
+                    countryLegalEntity  = "{/d/I0001Werks} {/d/I0001WerksName}"
+                    officeLocation      = "{/d/I0001Btrtl} {/d/I0001BtrtlName}"/>
+        	
+            <Table inset="false" backgroundDesign="Transparent" class="sapUiSizeCompact">
+            <columns>
+              <Column width="30%"/>
+              <Column width="35%" minScreenWidth="Tablet" demandPopin="true"/>
+              <Column width="35%" minScreenWidth="Tablet" demandPopin="true"/>
+            </columns>
+            <items>
+                <ColumnListItem vAlign="Middle">
+                <cells>
+                    <ObjectIdentifier title="Contract Effective Date" id="contractEffectiveDate-title"/>
+                    <Table backgroundDesign="Transparent" id="contractEffectiveDateOld-table"><columns><Column /><Column width="10em"/></columns>
+                    <ColumnListItem>
+                        <cells>
+                            <Text id="contractEffectiveDateOld"/>    
+                            <Text/>
+                        </cells>
+                    </ColumnListItem>
+                    </Table>
+                    
+                    <Table backgroundDesign="Transparent"><columns><Column width="15%"/><Column width="70%"/><Column width="15%"/></columns>
+                        <ColumnListItem>
+                            <cells>
+                                <Button icon="sap-icon://message-error" type="Reject" id="contractEffectiveDate-error" press="error" app:id="contractEffectiveDate"/>
+                                <DatePicker 
+                                change="validations"
+                                displayFormat="long" valueFormat= "long"  
+                                width="100%" id="contractEffectiveDate" placeholder="mm-dd-yyyy"/>
+                            </cells>
+                        </ColumnListItem>
+                    </Table>
+                    
+
+                </cells>
+              </ColumnListItem>
+              <ColumnListItem vAlign="Middle">
+                <cells>
+                    <ObjectIdentifier title="Company"/>
+                    <Table backgroundDesign="Transparent"><columns><Column width="85%"/><Column width="15%"/></columns>
+                        <ColumnListItem>
+                            <cells>
+                                <Text text="{/d/I0016Kontx}"/>
+                            </cells>
+                        </ColumnListItem>
+                    </Table>
+
+                </cells>
+              </ColumnListItem>
+              <ColumnListItem vAlign="Middle">
+                <cells>
+                  <ObjectIdentifier title="Contract Type" id="contractType-title"/>
+                  
+                  
+                  <Table backgroundDesign="Transparent"><columns><Column width="70%"/></columns>
+                  <ColumnListItem>
+                        <cells>
+                            <Text text="{/d/I0016CttypDescrCurr}" id="contractType-old"/>    
+                        </cells>
+                    </ColumnListItem>
+                  </Table>
+
+                </cells>
+              </ColumnListItem>
+              
+              <ColumnListItem vAlign="Middle">
+                <cells>
+                  <ObjectIdentifier title="Contract End Date" id="contractEndDate-title"/>
+                  
+                  <Table backgroundDesign="Transparent"><columns><Column width="85%"/><Column width="15%"/></columns>
+                  <ColumnListItem>
+                        <cells>
+                            <Text id="contractEndDate-old" text="{path: '/d/I0016CtedtCurr', formatter: 'HR.util.Formatter.getNormalDate' }"/>
+                            <Button icon="sap-icon://edit" type="Transparent" app:id="contractEndDate" press="edit" id="contractEndDate-edit"/>
+                        </cells>
+                    </ColumnListItem>
+                  </Table>
+                  
+                  <Table backgroundDesign="Transparent" id="contractEndDate-table"><columns><Column width="15%"/><Column width="70%"/><Column width="15%"/></columns>
+                  <ColumnListItem>
+                        <cells>
+                        <Button icon="sap-icon://message-error" type="Reject" id="contractEndDate-error" press="error" app:id="contractEndDate"/>
+                          <DatePicker 
+                          change="validations"
+                          displayFormat="long" placeholder="mm-dd-yyyy" valueFormat= "long" id="contractEndDate" width="100%"/>
+                           <Button icon="sap-icon://sys-cancel-2" type="Transparent" app:id="contractEndDate" press="cancel" id="contractEndDate-cancel"/>
+                          </cells>
+                    </ColumnListItem>
+                  </Table>
+                  
+                  
+                  
+                </cells>
+              </ColumnListItem>
+            </items>
+            </Table>
+            <TextArea placeholder="Comments" id="comments" cols="200" rows="3" maxLength="250" value="{/d/HrasrCurrentNote}"/>
+            </VBox>
+            <footer>
+                 <Bar>
+                    <contentRight>
+                        <Button id="close" text="Close" type="Emphasized" press="close"/>
+                        <Button id="submit" text="Submit" type="Accept" press="submit"/>
+                    </contentRight>
+                 </Bar>
+            </footer> 
+        	</Page>
+</core:View>

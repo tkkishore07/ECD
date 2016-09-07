@@ -1,0 +1,29 @@
+<mvc:View
+  controllerName="HR.view.Menu"
+  xmlns:mvc="sap.ui.core.mvc"
+   xmlns:core="sap.ui.core"
+  xmlns="sap.m"
+>
+  
+<Page enableScrolling="true" id="Menu">
+	<List id="menuList"
+	    mode="None"
+	    select="menuSelect"
+	    updateFinished="menuSelect"
+		items="{/results}">
+		<items>
+			<ObjectListItem
+				title="{title}"
+				type="Navigation"
+				press="menuSelectPress">
+			</ObjectListItem>
+		</items>
+	</List>
+	<footer>
+	    <Toolbar>
+        <ToolbarSpacer/>
+        <Button id="HideButton" icon="sap-icon://navigation-left-arrow" press="hide"/>
+        </Toolbar>
+	   </footer>
+</Page>
+</mvc:View>

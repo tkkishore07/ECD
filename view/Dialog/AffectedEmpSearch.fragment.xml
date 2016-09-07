@@ -1,0 +1,30 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+    xmlns:core="sap.ui.core">
+  <SelectDialog
+    title="{i18n>affectedEmpFTitle}"
+    id="AffectedEmp"
+    items="{/d/results}"
+    search="_affectedEmpSearchPopupSearch"
+    confirm="_affectedEmpSearchPopupConfirm"
+    contentHeight="30%">
+   
+        <CustomListItem type="Active" id="managersList">
+            <HBox class="fixFlexHorizontal" vertical="false">
+              <Image src="{ path: 'Pernr', formatter: 'HR.util.General.loadPicture' }" width="40px"/>
+            <HBox>
+            
+                        <VBox class="marginPersonData">
+                            <Text text="{EmpName}"/>
+                            <Label text="{Plstx}"/>
+                            <Label text="Employee ID: {PersonID}"/>
+                        </VBox>   
+          </HBox>
+          </HBox>
+       </CustomListItem> 
+
+  </SelectDialog>
+</core:FragmentDefinition>
+

@@ -1,0 +1,80 @@
+<core:View xmlns:core="sap.ui.core" 
+	xmlns:mvc="sap.ui.core.mvc" 
+	xmlns:f= "sap.ui.layout.form"
+	xmlns:l= "sap.ui.layout"
+	xmlns="sap.m" controllerName="HR.view.EmployeeDataChangeSuccess" 
+	xmlns:html="http://www.w3.org/1999/xhtml">	
+	
+	<html:style>
+            div[id$="EmployeeDataChangeSuccess"] .sapMFlexBox{
+                margin-left: auto !important;
+                margin-right: auto !important;
+                max-width: 1024px;
+            }
+            div[id$="successTable"] .sapMListTblCell{
+                border-bottom:none !important;
+                border-top:none !important;
+            }
+	</html:style>
+	
+	<Page title="{i18n>employeeDataChangeTitle}" id="EmployeeDataChangeSuccess">
+	    <content> <VBox>
+	     <Table backgroundDesign="Transparent" id="successTable">
+	        <columns><Column></Column></columns>
+            <items>
+            <ColumnListItem>   
+                <cells>
+        	    <ObjectStatus
+                    text="Your request has been successfully submitted."
+                    state="Success" />
+	            </cells>
+	        </ColumnListItem>  
+            <ColumnListItem>   
+                <cells>
+        	    <Text id="processReferenceNumber"/>
+	            </cells>
+	        </ColumnListItem>  
+            <ColumnListItem id="showButtonRow">   
+                <cells>
+        	    <Button id="showButton" text="Show Approval Path" press="showApprovalPath" visible='true'/>
+	            </cells>
+	        </ColumnListItem> 
+	        </items>
+        </Table>  
+	    <Table id="ApprovalPathTable" items="{/d/results}" noDataText="No Approval Required">
+            <columns>
+             <Column hAlign="Left">
+               <Text text="Processor"/>
+             </Column>
+             <Column  minScreenWidth="Tablet"  demandPopin="true"  hAlign="Center">
+               <Text text="Date"/>
+             </Column>
+             <Column hAlign="Left">
+               <Text text="Comments"/>
+             </Column>
+	        </columns>
+            <items>
+                <ColumnListItem>      
+                 <cells>
+	             <Text text="{ApproverName}" /> 
+                 <Text text="{path: 'DateTime', formatter: 'HR.util.Formatter.getChangedFormat'}"/>
+                 <Text 
+                    text="{path: 'ApproverComments',
+                    formatter: 'HR.util.Formatter.newLineCharacter'}" />
+	             </cells>
+                </ColumnListItem>
+            </items>
+        </Table>
+        </VBox>
+
+        
+	    </content> 
+	    
+	    <footer>
+            <Toolbar>
+                <ToolbarSpacer/>
+                    <Button text="Home" icon="sap-icon://home" type="Emphasized" press="home"/>
+            </Toolbar>
+        </footer>
+	</Page>
+</core:View>

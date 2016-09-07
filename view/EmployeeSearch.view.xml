@@ -1,0 +1,65 @@
+<mvc:View
+  controllerName="HR.view.EmployeeSearch"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m"
+  xmlns:html="http://www.w3.org/1999/xhtml"
+  xmlns:core="sap.ui.core"
+  xmlns:custom="HR.controls"
+  xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+>
+<html:style>
+	div[id$="EmployeeSearch"] .sapMSF {
+        margin:3% 10% 3% 10%
+    }
+    div[id$="EmployeeSearch"] .sapMFlexBox {
+        margin-left: auto !important;
+        margin-right: auto !important;
+        max-width: 1024px;
+
+    }
+    div[id$="EmployeeSearch"] div[id$="busyIndicator"] {
+        text-align:center !important;
+    }
+</html:style>
+ <Page 
+    title="{i18n>appTitle}"
+    id="EmployeeSearch"
+    showNavButton="{device>/isPhone}" navButtonPress="showMaster"
+    enableScrolling="true" >
+    <VBox>
+	<SearchField
+			id="search"
+			search="onSearch"
+			width="80%"
+			class="marginAll">
+	</SearchField>
+    
+    <BusyIndicator id="busyIndicator" visible="false"/>
+        
+    <ScrollContainer id="container" vertical="true"  content="{/results}" width="100%">
+        <content>
+            <custom:Card
+                photoUrl = "{ path: 'Pernr', formatter: 'HR.util.General.loadPicture' }"
+                name = "{I0001Ename}"
+                title = "{Stext}"
+                employeeID = "{PersonID}"
+                pernrID = "{Pernr}"
+                press="openMenu"/>
+        </content>
+      
+    </ScrollContainer> 
+    </VBox>
+    <footer>
+         <Bar>
+            <contentLeft>
+               <Button id="Previous" text="Previous" type="Emphasized" press="paginationStr" app:data="-1"/>
+            </contentLeft>
+            <contentMiddle><Label id="Displaying"/>
+            </contentMiddle>
+            <contentRight>
+               <Button id="Next" text="Next" type="Emphasized" press="paginationStr" app:data="1"/>
+            </contentRight>
+         </Bar>
+    </footer> 
+</Page>
+</mvc:View>

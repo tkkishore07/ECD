@@ -1,0 +1,27 @@
+<core:FragmentDefinition
+  xmlns="sap.m"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+  xmlns:core="sap.ui.core">
+  <SelectDialog
+    title="{i18n>hrbpFTitle}"
+    id="HRBPSearch"
+    items="{/d/results}"
+    search="_hrbpSearchPopupSearch"
+    confirm="_hrbpSearchPopupConfirm"
+    contentHeight="32%">
+  
+        <CustomListItem type="Active" id="hrbpList" >
+            <HBox class="fixFlexHorizontal" vertical="false">
+              <Image src="{ path: 'HrbpPernr', formatter: 'HR.util.General.loadPicture' }" width="40px"/>
+            <HBox>
+                        <VBox class="marginPersonData">
+                            <Text  text="{EmpName}"/>
+                            <Label text="Employee ID: {HrbpID}"/>
+                        </VBox>        
+          </HBox>
+          </HBox>
+       </CustomListItem> 
+
+  </SelectDialog>
+</core:FragmentDefinition>

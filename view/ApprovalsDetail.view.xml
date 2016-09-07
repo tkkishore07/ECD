@@ -1,0 +1,388 @@
+<core:View xmlns:core="sap.ui.core"  
+        	xmlns:mvc="sap.ui.core.mvc" 
+        	xmlns:l="sap.ui.layout"
+        	xmlns="sap.m" 
+        	xmlns:custom="HR.controls"
+        	controllerName="HR.view.ApprovalsDetail" 
+        	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+        	xmlns:html="http://www.w3.org/1999/xhtml">
+        	<html:style>
+
+                .sapMPanel .sapMFlexItem{
+                    margin-top:5px;
+                    margin-bottom:5px;
+                } 
+                div[id$="ApprovalsDetail"] .sapMFlexBox {
+                    margin-left: auto !important;
+                    margin-right: auto !important;
+                    max-width: 1024px;
+                }
+        	    @media screen and (min-width: 1354px) {
+                    div[id$="ApprovalsDetail"] .header {
+                        margin-top:20px;
+                    }
+                }
+        	    div[id$="ApprovalsDetail"] .sapMPanelContent {
+                    padding: 0rem;
+                }
+        	    div[id$="ApprovalsDetail"] .sapMPanelBG{
+        	        background-color: rgba(255,255,255,0.6);
+        	    }
+        	    
+        	    div[id$="ManagerSearch-dialog"] .marginPersonData {
+                   margin-left:10px;  
+                   margin-top:3px !important;  
+             	}
+             	div[id$="ManagerSearch-dialog"] .sapMLabelMaxWidth {
+                    font-size: 0.75rem !important;
+                }
+                div[id$="ManagerSearch-dialog"] .sapUiFixFlexFlexible{
+                    overflow:visible !important;
+                }
+                div[id$="ManagerSearch-dialog"] .sapUiFixFlexFixed{
+                    height:80px !important;
+                }
+                div[id$="ManagerSearch-dialog"] .sapMImg{
+                    margin-top:3px !important;
+                    margin-left:5px !important;
+                    border-radius:3px !important;
+                    margin-right: 10px !important;
+                }
+                div[id$="ManagerSearch-dialog"] .sapMLIBContent{
+                    padding: 5px !important;
+                }
+                div[id$="ManagerSearch-dialog"] .sapMGrowingListTrigger{
+                    border-top: none !important;
+                }
+             </html:style>  
+        	<Page id="ApprovalsDetail" title="{i18n>approvalsDetailTitle}" showNavButton="{device>/isPhone}" navButtonPress="back">
+     
+        	<VBox>
+        	
+        	<custom:Header name         = "{/d/EmployeeName}"
+                    title               = "{/d/I0001PtextCurr}" 
+                    employeeID          = "{/d/PersonID}"
+                    showMoreDetails     = "false"/>
+        	
+            
+            <Table inset="false" backgroundDesign="Transparent">
+            <columns>
+              <Column/>
+              <Column minScreenWidth="Tablet" demandPopin="true"/>
+            </columns>
+            <ColumnListItem vAlign="Middle">
+                <cells>
+                  <ObjectIdentifier title="Effective Date"/>
+                <ObjectStatus text="" icon="sap-icon://accept" state="Success" id="effectiveDate"/>
+                </cells>
+            </ColumnListItem>    
+            </Table>
+            
+            
+            
+            
+        	<Panel expandable="true" expanded="false" headerText="Organization Assignment" class="sapUiSizeCompact" id="organizationAssignment">  
+            <Table inset="false" backgroundDesign="Transparent">
+            <columns>
+              <Column/>
+              <Column minScreenWidth="Tablet" demandPopin="true"/>
+            </columns>
+            <items>
+              <ColumnListItem vAlign="Middle">
+                <cells>
+                  <ObjectIdentifier
+                    title="Manager"/>
+                  <VBox>        
+                  <ObjectStatus id="manager-old"  text="{path: '/d/ManagerIDCurr',
+                                                        formatter: 'HR.util.Formatter.getPernr'} {/d/ManagerNameCurr}"  state="None" />
+                  <ObjectStatus id="manager" text="{path: '/d/ManagerIDNew',
+                                                    formatter: 'HR.util.Formatter.getPernr'} {/d/ManagerNameNew}"
+                                icon="sap-icon://accept" state="Success" visible="false"/>
+                  </VBox>    
+                </cells>
+              </ColumnListItem>
+        
+              <ColumnListItem vAlign="Middle" id="becomingAPeopleManager-section">
+                <cells>
+                  <ObjectIdentifier
+                    title="Becoming a People Manager"/>
+                  <VBox>         
+                  <ObjectStatus id="becomingAPeopleManager-old" text="{path: '/d/PeopleMngrCurr', formatter: 'HR.util.Formatter.becomingAPeopleManager'}" state="None"/>  
+                  <ObjectStatus id="becomingAPeopleManager" text="{path: '/d/PeopleMngrNew' , formatter:'HR.util.Formatter.becomingAPeopleManagerNew' }" icon="sap-icon://accept"
+                                    state="Success" visible="false"/> 
+                  </VBox>    
+                </cells>
+              </ColumnListItem>
+              
+              <ColumnListItem vAlign="Middle">
+                <cells>
+                  <ObjectIdentifier
+                    title="Cost Center"/>
+                <VBox>     
+                    <ObjectStatus id="costCenter-old" text="{/d/I0001KostlCurr} {/d/I0001KostlNameCurr}" state="None"/>
+                    <ObjectStatus id="costCenter" text="{/d/I0001KostlNew} {/d/I0001KostlNameNew}"  icon="sap-icon://accept"
+                                    state="Success" visible="false"/>
+                </VBox> 
+                </cells>
+              </ColumnListItem>
+            </items>
+            </Table>
+            </Panel>
+            <Panel expandable="true" expanded="false" headerText="Location"  class="sapUiSizeCompact" id="location">  
+            <Table inset="false" backgroundDesign="Transparent" >
+            <columns>
+              <Column/>
+              <Column minScreenWidth="Tablet" demandPopin="true"/>
+            </columns>
+            <items>
+              <ColumnListItem vAlign="Middle">
+                <cells>
+                  <ObjectIdentifier
+                    title="Country/Legal Entity"/>
+                    <VBox> 
+                  <ObjectStatus text="{/d/I0001Werks} {/d/I0001WerksName}"/>     
+                  </VBox> 
+                </cells>
+              </ColumnListItem>
+        
+                <ColumnListItem vAlign="Middle">
+                <cells>
+                  <ObjectIdentifier
+                    title="Office Location"/>
+                    <VBox> 
+                  <ObjectStatus id="officeLocation-old" text="{/d/I0001BtrtlCurr} {/d/I0001BtrtlNameCurr}" state="None"/>        
+                  <ObjectStatus id="officeLocation" text="{/d/I0001BtrtlNew} {/d/I0001BtrtlNameNew}" state="Success" icon="sap-icon://accept"
+                                visible="false"/> 
+                  </VBox> 
+                </cells>
+              </ColumnListItem>
+            </items>
+            </Table>
+               </Panel>      
+               
+             <Panel expandable="true" expanded="false" headerText="Job"  class="sapUiSizeCompact" id="job">     
+            <Table inset="false" backgroundDesign="Transparent" >
+            <columns>
+              <Column/>
+              <Column minScreenWidth="Tablet" demandPopin="true"/>
+            </columns>
+            <items>
+              <ColumnListItem vAlign="Middle">
+                <cells>
+                  <ObjectIdentifier
+                    title="Job Code"/>
+                    <VBox> 
+                  <ObjectStatus id="jobCode-old" text="{/d/I0001StellCurr} {/d/I0001ShortCurr}" state="None"/>  
+                  <ObjectStatus id="jobCode" text="{/d/I0001StellNew} {/d/I0001ShortNew}" state="Success" icon="sap-icon://accept"
+                                visible="false"/>  
+                  </VBox> 
+                </cells>
+              </ColumnListItem>
+        
+                <ColumnListItem vAlign="Middle">
+                <cells>
+                  <ObjectIdentifier
+                    title="Job Title"/>
+                <VBox> 
+                  <ObjectStatus id="jobTitle-old" text="{/d/I9002ZjobtitleCurr}" state="None"/>  
+                  <ObjectStatus id="jobTitle" text="{/d/I9002ZjobtitleNew}" state="Success" icon="sap-icon://accept"
+                                visible="false"/>
+                </VBox> 
+                </cells>
+              </ColumnListItem>
+              
+              <ColumnListItem vAlign="Middle">
+                <cells>
+                  <ObjectIdentifier
+                    title="Position Title"/>
+                  <VBox> 
+                  <ObjectStatus id="positionTitle-old" text="{/d/I0001PtextCurr}" state="None"/>  
+                  <ObjectStatus id="positionTitle" text="{/d/I0001PtextNew}" state="Success" icon="sap-icon://accept"
+                                visible="false"/> 
+                  </VBox> 
+                </cells>
+              </ColumnListItem>
+              
+              <ColumnListItem vAlign="Middle">
+                <cells>
+                  <ObjectIdentifier
+                    title="Job Level"/>
+                  <VBox> 
+                  <ObjectStatus id="jobLevel-old" text="{/d/I1051JcodeNameCurr}" state="None"/>  
+                  <ObjectStatus id="jobLevel" text="{/d/I1051JcodeNameNew}" state="Success" icon="sap-icon://accept"
+                                visible="false"/> 
+                  </VBox> 
+                </cells>
+              </ColumnListItem>
+              
+              <ColumnListItem vAlign="Middle">
+                <cells>
+                  <ObjectIdentifier
+                    title="Signature Authority"/>
+                   <VBox> 
+                  <ObjectStatus id="managerLevel-old" text="{/d/I1010HilfmCurr} {/d/I1010HilfmDescrCurr}" state="None"/>  
+                  <ObjectStatus id="managerLevel" text="{/d/I1010HilfmNew} {/d/I1010HilfmDescrNew}" state="Success" icon="sap-icon://accept"
+                                visible="false"/> 
+                   </VBox> 
+                </cells>
+              </ColumnListItem>
+              
+            </items>
+            </Table>
+            </Panel>
+            <Panel expandable="true" expanded="false" headerText="Pay"  class="sapUiSizeCompact" id="pay">  
+            <Table inset="false" backgroundDesign="Transparent" >
+            <columns>
+              <Column/>
+              <Column minScreenWidth="Tablet" demandPopin="true"/>
+            </columns>
+            <items>
+              <ColumnListItem vAlign="Middle">
+                <cells>
+                  <ObjectIdentifier
+                    title="Annual Salary"/>
+                    <VBox> 
+                    <ObjectStatus id="annualSalary-old" text="{
+                               path: '/d/CurrAnsal',
+                               formatter: 'HR.util.Formatter.getMoney'
+                               } {/d/I0008Waers}" state="None"/>  
+                    <ObjectStatus id="annualSalary" text="{
+                               path: '/d/NewAnsal',
+                               formatter: 'HR.util.Formatter.getMoney'
+                               } {/d/I0008Waers}" state="Success" icon="sap-icon://accept" visible="false"/> 
+                    </VBox> 
+                </cells>
+              </ColumnListItem>
+        
+                <ColumnListItem vAlign="Middle">
+                <cells>
+                  <ObjectIdentifier
+                    title="Target Commission"/>
+                    <VBox> 
+                    <ObjectStatus id="targetCommission-old" text="{
+                                   path: '/d/CurrCommision',
+                                   formatter: 'HR.util.Formatter.getMoney'
+                                   } {/d/I0008Waers}" state="None"/>  
+                    <ObjectStatus id="targetCommission" text="{
+                                   path: '/d/NewCommision',
+                                   formatter: 'HR.util.Formatter.getMoney'
+                                   } {/d/I0008Waers}" state="Success" icon="sap-icon://accept" visible="false"/>
+                    </VBox> 
+                </cells>
+              </ColumnListItem>
+              
+              <ColumnListItem vAlign="Middle">
+                <cells>
+                  <ObjectIdentifier
+                    title="RSU"/>
+                    <VBox> 
+                    <ObjectStatus id="rsu-old" text="Check with HRBP" state="None"/>  
+                    <ObjectStatus id="rsu" text="{/d/I0761RsuNew}" state="Success" icon="sap-icon://accept" visible="false"/>
+                    </VBox> 
+                </cells>
+              </ColumnListItem>
+              
+              <ColumnListItem vAlign="Middle">
+                <cells>
+                  <ObjectIdentifier
+                    title="Stock"/>
+                    <VBox> 
+                    <ObjectStatus id="stockOption-old" text="Check with HRBP" state="None"/>  
+                    <ObjectStatus id="stockOption" text="{/d/I0761StockNew}" state="Success" icon="sap-icon://accept" visible="false"/>
+                    </VBox> 
+                </cells>
+              </ColumnListItem>
+              
+            </items>
+            </Table>
+             </Panel>
+            <Panel expandable="true" expanded="false" headerText="SDSS/SDSM Only"  class="sapUiSizeCompact" id="sdssSdsmOnly">     
+            <Table inset="false" backgroundDesign="Transparent" >
+            <columns>
+              <Column/>
+              <Column minScreenWidth="Tablet" demandPopin="true"/>
+            </columns>
+            <items>
+              <ColumnListItem vAlign="Middle">
+                <cells>
+                  <ObjectIdentifier
+                    title="Leader"/>
+                  <VBox> 
+                    <ObjectStatus id="leader-old" text="{/d/I0001ZzldridCurr} {/d/I0001ZzldridNameCurr}" state="None"/>  
+                    <ObjectStatus id="leader" text="{/d/I0001ZzldridNew} {/d/I0001ZzldridNameNew}" state="Success" icon="sap-icon://accept"
+                                    visible="false"/>
+                  </VBox> 
+                </cells>
+              </ColumnListItem>
+        
+              <ColumnListItem vAlign="Middle">
+                <cells>
+                  <ObjectIdentifier
+                    title="Labor Classification"/>
+                    <VBox> 
+                    <ObjectStatus id="laborClassification-old" text="{LaborClassCurr}" state="None"/>  
+                    <ObjectStatus id="laborClassification" text="{LaborClassNew}" state="Success" icon="sap-icon://accept"
+                                    visible="false"/>
+                    </VBox> 
+                </cells>
+              </ColumnListItem>
+            </items>
+            </Table>    
+            </Panel>
+            <Text/>
+            <Table id="ApprovalHistoryTable" 
+                class="sapUiSizeCompact" 
+                width="100%" 
+                headerText="Process Steps"
+                backgroundDesign="Transparent"
+                items="{/d/ZAPPROVALHISTORYSet/results}" 
+                noDataText = "No Approval History maintained for this request" 
+                showNoData="true"> 
+            <columns>
+            <Column hAlign="Left"  width="10%" mergeDuplicates="true">
+                <header>
+                    <Text text="Step"/>
+                </header>    
+             </Column>
+             <Column hAlign="Left"  width="30%">
+                <header>
+                    <Text text="Processor"/>
+                </header>    
+             </Column>
+             <Column  minScreenWidth="Tablet"  demandPopin="true"  hAlign="Left"  width="20%">
+                <header>
+                    <Text text="Date"/>
+                </header>    
+             </Column>
+             <Column minScreenWidth="Tablet" demandPopin="true" hAlign="Left"  width="40%">
+                <header>
+                    <Text text="Comments"/>
+                </header>    
+             </Column>
+	        </columns>
+            <items>
+                <ColumnListItem>      
+                 <cells>
+                 <Text text="{path: 'ApprovalLevel', formatter: 'HR.util.Formatter.toInteger'}"/>
+	             <Text text="{Approver} {ApproverName}"/> 
+                 <Text text="{path: 'DateTime', formatter: 'HR.util.Formatter.getChangedFormat'}"/>
+                 <Text 
+                    text="{path: 'ApproverComments',
+                    formatter: 'HR.util.Formatter.newLineCharacter'}" />
+	             </cells>
+                </ColumnListItem>
+            </items>
+            </Table>
+        </VBox>
+            
+        <footer>
+	    <Toolbar>
+        <ToolbarSpacer/>
+        <Button id="ForwardButton" text="Forward" press="forward"/>
+        <Button id="ApproveButton" type="Accept" text="Approve" press="approve"/>
+        <Button id="RejectButton" type="Reject" text="Reject" press="reject"/>
+        </Toolbar>
+	   </footer>
+	   
+       </Page>
+</core:View>

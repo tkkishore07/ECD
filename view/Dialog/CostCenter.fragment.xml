@@ -1,0 +1,114 @@
+<core:FragmentDefinition
+  xmlns="sap.m"
+  xmlns:html="http://www.w3.org/1999/xhtml"
+  xmlns:core="sap.ui.core">
+<Dialog id="CostCenterSearch"
+	title="{i18n>costCenterFTitle}"
+	contentWidth="35rem">
+	<content>
+	    <Table id="CostCenterForm" inset="false" backgroundDesign="Transparent" class="sapUiSizeCompact">
+            <columns>
+              <Column width="30%"/>
+              <Column width="70%"/>
+            </columns>
+            <items>
+                <ColumnListItem vAlign="Middle">
+                <cells>
+                    <ObjectIdentifier title="Company"/>
+                    <Table design="Transparent"><columns><Column/></columns>
+                    <items>
+                    <ColumnListItem><cells>
+                        <Text id="Company"/>                  
+                    </cells>
+                    </ColumnListItem>  
+                    </items>
+                    </Table>
+                </cells>
+                </ColumnListItem>
+               <ColumnListItem vAlign="Middle">
+                <cells>
+                    <ObjectIdentifier title="Profit Center"/>
+                    <Table design="Transparent"><columns><Column/></columns>
+                    <items>
+                    <ColumnListItem><cells>
+                    <Select id="ProfitCenter" width="100%" items="{/d/results}" change="_profitCenterChange">
+                        <core:Item key="{ProfitCenter}" text="{PrctrText}"/>
+                    </Select>                   
+                    </cells>
+                    </ColumnListItem>  
+                    </items>
+                    </Table>
+                </cells>
+                </ColumnListItem>
+               <ColumnListItem vAlign="Middle">
+                <cells>
+                    <ObjectIdentifier title="Cost Center"/>
+                    <Table design="Transparent"><columns><Column  width="85%"/><Column  width="15%"/></columns>
+                    <items>
+                    <ColumnListItem>
+                    <cells>
+                        <Input id="costCenter"/>
+                	    <Button
+                		    	id="SearchlButton"
+                		    	icon="sap-icon://filter"
+                		    	press="_profitCenterChange"/>
+                    </cells>
+                    </ColumnListItem>  
+                    </items>
+                    </Table>
+                </cells>
+                </ColumnListItem>
+            </items>
+        </Table>
+        <Text/>
+        <Table id="CostCenterSearchTable" class="sapUiSizeCompact" items="{/d/results}"  growing="true" growingThreshold="10"  width="100%" 
+             noDataText= "No Cost Center Found" showNoData= "true" visible="false">  
+            <columns>
+             <Column hAlign="Left"  width="30%">
+               <Text text="Cost Center" />
+             </Column>
+             <Column  minScreenWidth="Tablet"  demandPopin="true"  hAlign="Left" width="40%">
+               <Text text="Description" />
+             </Column>
+             <Column  minScreenWidth="Tablet"  demandPopin="true"  hAlign="Left" width="30%">
+               <Text text="Country" />
+             </Column>
+           </columns>
+           <items>
+                <ColumnListItem type="Active" selected="true" press= "_costCenterSelected">  
+                 <cells>
+                 <Link text="{Kostl}" press="_costCenterSelected"/>
+                 <Text text="{Ltext}" />
+                 <Text text="{Land1}" />
+                 </cells>
+               </ColumnListItem>
+           </items>
+        </Table>
+    </content> 
+	<buttons>
+	    <Button
+		    	id="CancelButton"
+		    	text="Cancel"
+		    	press="_costCenterPopupClose"/>
+	</buttons>
+</Dialog>
+    <!--<TableSelectDialog id="CostCenterSearchTable" noDataText="No Cost Center Found" title="Cost Center Search" contentWidth="25rem"-->
+    <!--    search="_costCenterFilter" -->
+    <!--    confirm="_costCenterSelection"-->
+    <!--    items="{/d/results}">-->
+    <!--    <ColumnListItem>-->
+    <!--        <cells>-->
+    <!--            <Link text="{Kostl}" press="_costCenterSelected"/>-->
+    <!--            <Text text="{Ltext}"/>-->
+    <!--        </cells>-->
+    <!--    </ColumnListItem>-->
+    <!--    <columns>-->
+    <!--        <Column hAlign="Left"  width="40%">-->
+    <!--           <Text text="Cost Center" />-->
+    <!--        </Column>-->
+    <!--        <Column  minScreenWidth="Tablet"  demandPopin="true"  hAlign="Left" width="60%">-->
+    <!--           <Text text="Description" />-->
+    <!--        </Column>-->
+    <!--    </columns>-->
+    <!--</TableSelectDialog>-->
+</core:FragmentDefinition>

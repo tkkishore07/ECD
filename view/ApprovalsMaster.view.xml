@@ -1,0 +1,72 @@
+<mvc:View
+  controllerName="HR.view.ApprovalsMaster"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m"
+  xmlns:html="http://www.w3.org/1999/xhtml"
+  xmlns:core="sap.ui.core"
+>
+	<html:style>
+        div[id$="ApprovalsMaster"] .marginPersonData {
+           margin-left:10px;  
+           margin-top:10px;  
+     	}
+     	div[id$="ApprovalsMaster"] .sapMLabelMaxWidth {
+
+            font-size: 0.75rem !important;
+        }
+        div[id$="ApprovalsMaster"] .sapUiFixFlexFlexible{
+            overflow:visible !important;
+        }
+        div[id$="ApprovalsMaster"] .sapUiFixFlexFixed{
+            height:80px !important;
+        }
+        div[id$="ApprovalsMaster"] .sapMImg{
+            margin-top:5px;
+            margin-left:5px;
+            border-radius:3px;
+        }
+        div[id$="ApprovalsMaster"] .sapMLIBContent{
+            padding: 5px !important;
+        }
+        div[id$="ApprovalsMaster"] .sapMGrowingListTrigger{
+            border-top: none !important;
+        }
+     	</html:style>
+  
+ <Page 
+ 	id="ApprovalsMaster" showNavButton="true" navButtonPress="handleNavButtonPress"
+ 	title="{i18n>approvalsMasterTitle}"
+    enableScrolling="true" >
+    
+       <List items="{
+            path: '/d/results'
+            }"
+            id="approvalsList"
+            growing="true"
+            growingThreshold="5">
+        <CustomListItem type="Active" press="openECD" title="Process" >
+            <HBox class="fixFlexHorizontal" vertical="false">
+              <Image src="{ path: 'Pernr', formatter: 'HR.util.General.loadPicture' }" width="40px"/>
+            <HBox>
+                <VBox class="marginPersonData">
+                    <Text text="{EmployeeName}"/>
+                    <Label text="{PositionTitle}"/>
+                    <Label text="Employee ID: {PersonID}"/>
+                    <Label text="{path: 'DaysPending', formatter: 'HR.util.Formatter.getPendingDays'}" design="Bold"/>
+                </VBox>    
+            </HBox>
+            </HBox>
+        </CustomListItem> 
+        </List>
+        
+        <footer>
+	    <Toolbar>
+	    <Button id="RefreshButton" icon="sap-icon://refresh" press="refresh"/>
+        <ToolbarSpacer/>
+        <Button id="HideButton" icon="sap-icon://navigation-left-arrow" press="hide"/>
+        <Button id="ShowButton" icon="sap-icon://navigation-right-arrow" press="show"/>
+        </Toolbar>
+	   </footer>
+        
+</Page>
+</mvc:View>

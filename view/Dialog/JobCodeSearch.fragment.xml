@@ -1,0 +1,137 @@
+<core:FragmentDefinition
+  xmlns="sap.m"
+  xmlns:html="http://www.w3.org/1999/xhtml"
+  xmlns:core="sap.ui.core">
+
+<Dialog id="JobCodeSearch"
+	title="{i18n>jobCodeFTitle}"
+	contentWidth="50rem">
+
+	<content>
+	    <Table id="JobCodeSearchForm" inset="false" backgroundDesign="Transparent" class="sapUiSizeCompact">
+            <columns>
+              <Column width="20%"/>
+              <Column width="40%"/>
+              <Column width="40%" minScreenWidth="Tablet"  demandPopin="true"  />
+            </columns>
+            <items>
+            <ColumnListItem vAlign="Middle">
+                <cells>
+                    <ObjectIdentifier title="Job Track"/>
+                    <Table design="Transparent"><columns><Column/></columns>
+                    <items>
+                    <ColumnListItem><cells>
+                    <Select id="JobTrack" width="100%" items="{/d/results}" change="_jobCodeListDisplay">
+                    <core:Item key="{Jcode}" text="{Ltext}"/>
+                    </Select>                    
+                    </cells>
+                    </ColumnListItem>  
+                    </items>
+                    </Table>
+                    <Text/>
+                </cells>
+                </ColumnListItem>
+                <ColumnListItem vAlign="Middle">
+                <cells>
+                    <ObjectIdentifier title="Job Group"/>
+                    <Table design="Transparent"><columns><Column/></columns>
+                    <items>
+                    <ColumnListItem><cells>
+                    <Select id="JobGroup" width="100%" items="{/d/results}" change="_jobCodeListDisplay">
+                        <core:Item key="{Cjobgrp}" text="{Ltext}"/>
+                    </Select>                    
+                    </cells>
+                    </ColumnListItem>  
+                    </items>
+                    </Table>
+                    <Text/>
+                </cells>
+                </ColumnListItem>
+                <ColumnListItem vAlign="Middle">
+                <cells>
+                    <ObjectIdentifier title="Job Family"/>
+                    <Table design="Transparent"><columns><Column/></columns>
+                    <items>
+                    <ColumnListItem><cells>
+                 <Select id="JobFamily" width="100%" 
+                 items="{/d/results}" change="_jobCodeListDisplay">
+                    <core:Item key="{Evgrd}" text="{Ltext}"/>
+                    </Select>                    
+                    </cells>
+                    </ColumnListItem>  
+                    </items>
+                    </Table>
+                    <Text/>
+                </cells>
+                </ColumnListItem>  
+               <ColumnListItem vAlign="Middle">
+                <cells>
+                    <ObjectIdentifier title="Job Code"/>
+                    <Table design="Transparent"><columns><Column  width="85%"/><Column  width="15%"/></columns>
+                    <items>
+                    <ColumnListItem>
+                    <cells>
+                        <Input id="JobCode"/>
+                	    <Button
+                		    	id="SearchlButton"
+                		    	icon="sap-icon://filter"
+                		    	press="_jobCodeListDisplay"/>
+                    </cells>
+                    </ColumnListItem>  
+                    </items>
+                    </Table>
+                    <Text/>
+                </cells>
+                </ColumnListItem>
+            </items>
+        </Table>
+	
+        <Text/>
+        <Table id="JobCodeSearchTable" class="sapUiSizeCompact" items="{/d/results}"  
+            growing="true" growingThreshold="10"  width="100%" 
+            noDataText = "No Job Codes Found" showNoData="false" >
+            <columns>
+               <Column  minScreenWidth="Tablet"  demandPopin="true"  hAlign="Center" width="10%">
+               <Text text="Job Code"/>
+             </Column>
+             <Column  minScreenWidth="Tablet"  demandPopin="true"  hAlign="Left"   width="27.5%">
+               <Text text="Job Desc"/>
+             </Column>
+             <Column  minScreenWidth="Tablet"  demandPopin="true"  hAlign="Left"   width="12.5%">
+               <Text text="Job Group"/>
+             </Column>
+             <Column  minScreenWidth="Tablet"  demandPopin="true"  hAlign="Left"   width="12.5%">
+               <Text text="Job Family"/>
+             </Column>
+             <Column  minScreenWidth="Tablet"  demandPopin="true"  hAlign="Left"   width="12.5%">
+               <Text text="Job Track"/>
+             </Column>
+             <Column  minScreenWidth="Tablet"  demandPopin="true"  hAlign="Left"   width="25%">
+               <Text text="Job Level"/>
+             </Column>
+           </columns>
+           <items>
+                <ColumnListItem type="Active" selected="true" press= "_jobCodeSelected">  
+                 <cells>
+                 <Link text="{JobAbbr}" press="_jobCodeSelected"/>
+                 <Text text="{JobTitle}"/> 
+                 <Text text="{JobGrp}"/>
+                 <Text text="{JobFamily}"/>
+                 <Text text="{JobTrack}"/>
+                 <Text text="{JobLevelText}"/>
+                 </cells>
+               </ColumnListItem>
+           </items>
+        </Table>
+    
+    </content> 
+
+	<buttons>
+	    <Button
+		    	id="CancelButton"
+		    	text="Cancel"
+		    	press="_jobCodeSearchPopupClose"/>
+
+	</buttons>
+</Dialog>
+</core:FragmentDefinition>

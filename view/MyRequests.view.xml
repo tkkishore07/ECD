@@ -1,0 +1,147 @@
+<core:View xmlns:core="sap.ui.core" 
+	xmlns:mvc="sap.ui.core.mvc" 
+	xmlns:l="sap.ui.commons.layout"
+	xmlns="sap.m" controllerName="HR.view.MyRequests" 
+	xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">	
+	    
+	<html:style>	
+       div[id$="MyRequests"] .sapMList {
+        	margin-top: 1rem !important;
+    	}	
+    	
+    	div[id$="MyRequests"] .sapMFlexItem {
+    	    position: relative;
+            padding: 10px;
+    	}
+
+        div[id$="MyRequests"] .sapMLIBShowSeparator>td {  
+          border-bottom: none !important;  
+        }
+	</html:style>   
+
+    <Page title="{i18n>myRequestsTitle}" id="MyRequests">
+    
+	    <content> 
+        
+                <Table 
+                    id="datePickers"
+                    class= "sapUiTinyMarginBottom sapUiSizeCompact"
+                    editable="false"
+                    inset="false" backgroundDesign="Transparent">
+                    
+                <columns>
+                    <Column width="50%"/>
+                    <Column width="50%" minScreenWidth="Tablet" demandPopin="true"/>
+                </columns> 
+                    <items>
+                        <ColumnListItem> 
+                            <cells>
+                            <Table backgroundDesign="Transparent"><columns><Column width="50%"/><Column width="15%"/><Column width="35%"/><Column/></columns>
+                            <ColumnListItem>
+                                <cells>
+                                    <Text text="Initiated Date From"/>
+                                    <Button icon="sap-icon://message-error" id="fromDate-error" type="Reject" press="error" app:id="fromDate"/>
+                                    <DatePicker id="fromDate" displayFormat="long" valueFormat= "long" change="onFromDateChange" placeholder="mm-dd-yyyy"/>
+                                    <Text/>
+                                </cells>
+                            </ColumnListItem>
+                            </Table>
+                            <Table backgroundDesign="Transparent"><columns><Column width="50%"/><Column width="15%"/><Column width="35%"/><Column/></columns>
+                            <ColumnListItem>
+                                <cells>
+                                    <Text text="Initiated Date To"/>
+                                    <Button icon="sap-icon://message-error" id="toDate-error" type="Reject" press="error" app:id="toDate"/>
+                                    <DatePicker id="toDate" displayFormat="long" change="onToDateChange" valueFormat= "long" placeholder="mm-dd-yyyy"/>
+                                    <Text/>
+                                </cells>
+                            </ColumnListItem>
+                            </Table>
+                            </cells>
+                        </ColumnListItem> 
+                         
+                    </items>
+                    </Table>
+        
+        
+       <Table id="myRequests"
+    	    class="sapUiSizeCompact"
+    	    growing="true"
+    	    growingThreshold="10" 
+    	    width="100%" 
+            noDataText = "No Requests Found" 
+            showNoData="false"
+            mode = "SingleSelectMaster"
+            select = "onRowSelectionChange"
+            items="{  
+                 path: '/d/results'  
+            }">
+            <columns>
+             <Column  minScreenWidth="Tablet"  demandPopin="true"  hAlign="Left"  width="8%">
+               <Text text="Work Item"/>
+             </Column>
+             <Column  minScreenWidth="Tablet"  demandPopin="true"  hAlign="Left"  width="8%">
+               <Text text="ECD ID"/>
+             </Column>
+             <Column  minScreenWidth="Tablet"  demandPopin="true"  hAlign="Left"   width="20%">
+               <Text text="EE ID"/>  
+             </Column>
+             <Column  minScreenWidth="Tablet"  demandPopin="true"  hAlign="Left"   width="10%">
+               <Text text="Started On"/>  
+             </Column>
+             <Column  minScreenWidth="Tablet"  demandPopin="true"  hAlign="Left"   width="10%">
+               <Text text="Last Modified"/>  
+             </Column>
+             <Column  minScreenWidth="Tablet"  demandPopin="true"  hAlign="Center" width="15%">
+               <Text text="Form Type"/>
+             </Column>
+             <Column  minScreenWidth="Tablet"  demandPopin="true"  hAlign="Left"   width="22%">
+               <Text text="Status"/>
+             </Column>
+             <Column  minScreenWidth="Tablet"  demandPopin="true"  hAlign="Left"   width="13%">
+               <Text text="Effective Date"/>  
+             </Column>
+            </columns>
+           <items >
+                <ColumnListItem>      
+                 <cells>
+                 <Link id ="ecdID" text="{WiID}" press ="onLinkPress" />
+                 <Text text="{EcdID}"/>
+                 <Text text="{Personid} {EmpName} "/>
+                 <Text text="{  
+                 path: 'StrtOn',
+                 formatter: 'HR.util.Formatter.getChangedFormat'}"/> 
+                 <Text text="{  
+                 path: 'LastMod',
+                 formatter: 'HR.util.Formatter.getChangedFormat'}"/>
+                 <Text text="{
+                 path: 'EcdName',
+                 formatter: 'HR.util.Formatter.getECDName'}" />
+                 <Text text="{Status}"/> 
+                 <Text
+                  text="{
+                  path: 'EffctDate',
+                  formatter: 'HR.util.Formatter.getNormalDate'
+                 }" />
+                 </cells>
+               </ColumnListItem>
+           </items>
+        </Table>
+	   </content> 
+	   
+	   
+	   <footer>
+	    <Toolbar>
+        <ToolbarSpacer/>
+        <Button id="ShowDetailsButton" type="Default" text="Details" press="showDetails" visible="false"/>
+        <Button id="OpenButton" type="Default" text="Open" press="onOpen" visible="false"/>
+        <Button id="CopyButton" type="Default" text="Copy" press="onCopy" visible="false"/>
+        <Button id="DiscardButton" type="Default" text="Discard Draft" press="onDiscard" visible="false"/>
+        <Button id="WithdrawButton" type="Default"  text="Withdraw" press="onWithdraw" visible="false"/>
+        </Toolbar>
+	   </footer>
+	   
+	   
+	</Page>
+</core:View>
+

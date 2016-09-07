@@ -1,0 +1,14 @@
+<core:FragmentDefinition
+  xmlns="sap.m"
+  xmlns:core="sap.ui.core"
+  xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+  <Dialog title="{i18n>cancelFTitle}" state="Error" >
+    <Text text="Do you want to cancel all your changes?" />
+    <beginButton>
+      <Button text="Yes" app:dialogType="Cancel" press="cancelYes" />
+    </beginButton>  
+    <endButton>  
+      <Button text="No" app:dialogType="Cancel" press="cancelNo" />
+    </endButton>
+  </Dialog>
+</core:FragmentDefinition>

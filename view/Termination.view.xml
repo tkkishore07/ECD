@@ -1,0 +1,165 @@
+<core:View xmlns:core="sap.ui.core"  
+        	xmlns:mvc="sap.ui.core.mvc" 
+        	xmlns:l="sap.ui.layout"
+        	xmlns="sap.m" 
+        	xmlns:custom="HR.controls"
+        	controllerName="HR.view.Termination" 
+        	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+        	xmlns:html="http://www.w3.org/1999/xhtml">
+        	<html:style>
+                div[id$="Termination"] .sapMFlexBox {
+                    margin-left: auto !important;
+                    margin-right: auto !important;
+                    max-width: 1024px;
+                }
+        	    @media screen and (min-width: 1354px) {
+                    div[id$="Termination"] .header {
+                        margin-top:20px;
+                        margin-bottom: 20px;
+                    }
+                }
+                div[id$="Termination"] .sapMListShowSeparatorsAll .sapMLIBShowSeparator:last-child>td{
+                    border-bottom: none !important;
+                }
+                .dropDownError {
+                    border-color: #e52929;
+                    border-width: 2px;
+                }
+             </html:style>  
+        	<Page 
+        	    id="Termination" 
+        	    title="{i18n>terminationTitle}" 
+        	    showNavButton="{device>/isPhone}" 
+        	    navButtonPress="handleNavButtonPress">
+     
+        	<VBox>
+        	<custom:Header 
+        	        id                  = "header"
+        	        name                = "{/d/I0001Ename}"
+                    title               = "{/d/I0001Ptext}"
+                    employeeID          = "{/d/PersonId}"
+                    showMoreDetails     = "true"
+                    manager             = "{/d/ManagerName}"
+                    workerType          = "{/d/I0001Persg} - {/d/I0001PersgName}"
+                    costCenter          = "{/d/I0001Kostl} - {/d/I0001KostlName}"
+                    countryLegalEntity  = "{/d/I0001Werks} {/d/I0001WerksName}"
+                    officeLocation      = "{/d/I0001Btrtl} {/d/I0001BtrtlName}"/>
+        	
+            <Table inset="false" backgroundDesign="Transparent" class="sapUiSizeCompact">
+            <columns>
+              <Column/>
+              <Column  minScreenWidth="Tablet" demandPopin="true"/>
+              <Column  minScreenWidth="Tablet"/>
+            </columns>
+            <items>
+                <ColumnListItem vAlign="Middle">
+                <cells>
+                    <ObjectIdentifier title="Termination Reason" id="terminationReason-title"/>
+                    
+                    <Table backgroundDesign="Transparent"><columns><Column width="15%"/><Column width="70%"/></columns>
+                        <ColumnListItem>
+                            <cells>
+                                <Button icon="sap-icon://message-error" type="Reject" id="terminationReason-error" press="error" app:id="terminationReason"/>
+                                <Select id="terminationReason" width="100%" items="{/d/results}" change="validations">
+                                    <core:Item key="{Massg}" text="{Mgtxt}" />
+                                </Select>
+                            </cells>
+                        </ColumnListItem>
+                    </Table>  
+                    
+                </cells>
+              </ColumnListItem>
+              <ColumnListItem vAlign="Middle">
+                <cells>
+                    <ObjectIdentifier title="Termination Date" id="terminationDate-title"/>
+                    
+                    
+
+                        
+                    <Table backgroundDesign="Transparent"><columns><Column width="15%"/><Column width="70%"/></columns>
+                        <ColumnListItem>
+                            <cells>
+                                <Button icon="sap-icon://message-error" type="Reject" id="terminationDate-error" press="error" app:id="terminationDate"/>
+                                <DatePicker 
+                                    displayFormat="long" valueFormat= "long" change="validations"  
+                                    width="100%" id="terminationDate" placeholder="mm-dd-yyyy"/>
+                            </cells>
+                        </ColumnListItem>
+                    </Table>  
+                        
+                </cells>
+              </ColumnListItem>
+              <ColumnListItem vAlign="Middle">
+                <cells>
+                    <ObjectIdentifier title="Last Day Worked" id="lastDayWorked-title"/>
+                    
+                    <Table backgroundDesign="Transparent"><columns><Column width="15%"/><Column width="70%"/></columns>
+                        <ColumnListItem>
+                            <cells>
+                                <Button icon="sap-icon://message-error" type="Reject" id="lastDayWorked-error" press="error" app:id="lastDayWorked"/>
+                                <DatePicker 
+                                    displayFormat="long" valueFormat= "long"  change="validations"
+                                    width="100%" id="lastDayWorked" placeholder="mm-dd-yyyy"/>
+                            </cells>
+                        </ColumnListItem>
+                    </Table>  
+                    
+                    
+
+                </cells>
+              </ColumnListItem>
+              
+              <ColumnListItem vAlign="Middle">
+                <cells>
+                  <ObjectIdentifier title="Rehire Eligible" id="rehireEligible-title"/>
+                  
+                    <Table backgroundDesign="Transparent"><columns><Column width="15%"/><Column width="70%"/></columns>
+                        <ColumnListItem>
+                            <cells>
+                                <Button icon="sap-icon://message-error" type="Reject" id="rehireEligible-error" press="error" app:id="rehireEligible"/>
+                                <Select id="rehireEligible" width="100%" change="validations">
+                                        <core:Item key="" text="" />
+                                        <core:Item key="Yes" text="Yes" />
+                                        <core:Item key="No" text="No" />
+                                </Select>
+                            </cells>
+                        </ColumnListItem>
+                    </Table>  
+                  
+
+                </cells>
+              </ColumnListItem>
+              
+              <ColumnListItem vAlign="Middle" id="israelTermNotificationDate-columnListItem">
+                <cells>
+                  <ObjectIdentifier title="Israel Term Notification Date" id="israelTermNotificationDate-title"/>
+                  
+                    <Table backgroundDesign="Transparent"><columns><Column width="15%"/><Column width="70%"/></columns>
+                        <ColumnListItem>
+                            <cells>
+                                <Button icon="sap-icon://message-error" type="Reject" id="israelTermNotificationDate-error" press="error" app:id="israelTermNotificationDate"/>
+                                <DatePicker displayFormat="long" placeholder="mm-dd-yyyy" valueFormat= "long" id="israelTermNotificationDate" width="100%" change="validations"/>
+                            </cells>
+                        </ColumnListItem>
+                    </Table>  
+                  
+                  
+                </cells>
+              </ColumnListItem>
+              
+            </items>
+            </Table>
+            <TextArea placeholder="Comments" id="comments" cols="200" rows="3" maxLength="250" value="{/d/HrasrCurrentNote}"/>
+            </VBox>
+            <footer>
+                 <Bar>
+                    <contentRight>
+                        <!--<Button id="cancelECD" text="Cancel ECD" type="Reject" press="cancelTermination"/>-->
+                        <!--<Button id="saveDraft" text="Save Draft" type="Emphasized" press="saveDraft"/>-->
+                        <Button id="close" text="Close" type="Emphasized" press="close"/>
+                        <Button id="submit" text="Submit" type="Accept" press="submit"/>
+                    </contentRight>
+                 </Bar>
+            </footer> 
+        	</Page>
+</core:View>

@@ -1,0 +1,91 @@
+<core:FragmentDefinition
+  xmlns="sap.m"
+  xmlns:html="http://www.w3.org/1999/xhtml"
+  xmlns:core="sap.ui.core"
+  xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+  
+  <VBox>
+  	   <Table id="showDetails" inset="false" backgroundDesign="Transparent" class="sapUiSizeCompact sapUiTinyMarginTop" width="100%"> 
+            <columns>
+              <Column  width="50%"/>
+              <Column width="2%" hAlign="Right"/> 
+              <Column  width="2%" hAlign="Right"/>
+            </columns>
+            <items>
+                <ColumnListItem  vAlign="Middle">
+                    <cells>
+                        <ObjectIdentifier id="institute" title="Carnegie Mellon University, USA"/>
+                        <Text/>
+                        <Text/>
+                    </cells>
+                </ColumnListItem>  
+                <ColumnListItem vAlign="Middle">
+                    <cells>
+                        <Text id="degree" text="Masters, May 2013- May 2014"></Text>
+                        <Text/>
+                        <Text/>
+                    </cells>
+                </ColumnListItem>  
+                <ColumnListItem vAlign="Middle">
+                    <cells>
+                        <Text id="majors" text="Information System Analyst, Economics"></Text>
+                        <Text/>
+                        <Text/>
+                    </cells>
+                </ColumnListItem>  
+            </items>
+            </Table>
+       <!-- <Table id="editDetails"  visible="false" inset="false" backgroundDesign="Transparent" class="sapUiSizeCompact sapUiTinyMarginTop">
+            <columns>
+                <Column width="10%" />
+                <Column width="5%" />
+                <Column width="25%" minScreenWidth="Tablet" demandPopin="true"/> 
+                <Column width="10%"/>
+                <Column width="10%" minScreenWidth="Tablet" demandPopin="true"/>
+                <Column width="5%" /> 
+                <Column width="25%" minScreenWidth="Tablet" demandPopin="true"/>
+                <Column width="6%"/>
+                <Column width="4%" />
+            </columns>
+            <ColumnListItem vAlign="Middle">
+                <cells>
+                        <Text text="Start Date"/>
+                        <Button icon="sap-icon://message-error" type="Reject" id="startDatePicker-error" press="error" app:id="startDatePicker" />
+                        <DateTimeInput id="startDatePicker" type="Date" placeholder="Enter Date ..." displayFormat="MMMM,yyyy" valueFormat="MMMM, yyyy" change="validations"/>
+                        <Text/>
+                        <Text text="Degree"/>
+                        <Button icon="sap-icon://message-error" type="Reject" id="degreeInput-error" press="error" app:id="degreeInput"/>
+                        <Input id="degreeInput" showValueHelp="true" valueHelpOnly="true"  valueHelpRequest="_degreeSearchPopUp" change="onValueChange"/>
+                        <Text/>
+                        <Button icon="sap-icon://decline" type="Transparent" press="decline"/>
+                </cells>
+            </ColumnListItem>  
+            <ColumnListItem  vAlign="Middle">
+                <cells>
+                        <Text text="End Date"/>
+                        <Button icon="sap-icon://message-error" type="Reject" id="endDatePicker-error" press="error" app:id="endDatePicker"/>
+                        <DateTimeInput id="endDatePicker" type="Date" placeholder="Enter Date ..." displayFormat="MMMM,yyyy" valueFormat="MMMM, yyyy" change="validations"/>
+                        <Text/>
+                        <Text  text="Major 1"/>
+                        <Text/>
+                        <Input id="major1" showValueHelp="true" valueHelpOnly="true"  valueHelpRequest="_majorSearchPopUp" change="onValueChange"/>
+                        <Text/>
+                        <Text/>
+                </cells>
+            </ColumnListItem>  
+            <ColumnListItem  vAlign="Middle">
+                <cells>
+                        <Text text="Institution"/>
+                        <Button icon="sap-icon://message-error" type="Reject" id="institutionInput-error" press="error" app:id="institutionInput"/>
+                        <Input id="institutionInput" showValueHelp="true" valueHelpOnly="true"  valueHelpRequest="_institutionSearchPopUp" change="onValueChange"/>
+                        <Text/>
+                        <Text text="Major 2"/>
+                        <Text/>
+                        <Input id="major2" showValueHelp="true" valueHelpOnly="true"  valueHelpRequest="_majorSearchPopUp" change="onValueChange"/>
+                        <Text/>
+                        <Text/>
+                </cells>
+            </ColumnListItem>  
+            </Table>-->
+    </VBox>
+</core:FragmentDefinition>  

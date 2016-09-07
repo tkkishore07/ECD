@@ -1,0 +1,76 @@
+<core:View xmlns:core="sap.ui.core" 
+	xmlns:mvc="sap.ui.core.mvc" 
+	xmlns="sap.m" controllerName="HR.view.Delegation" 
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	
+	<html:style>
+	    <!-- Delegation Search styling-->
+        div[id$="DelegateSearch-dialog"] .marginPersonData {
+           margin-left:10px;  
+           margin-top:3px !important;  
+        }
+        div[id$="DelegateSearch-dialog"] .sapMLabelMaxWidth {
+            font-size: 0.75rem !important;
+        }
+        div[id$="DelegateSearch-dialog"] .sapUiFixFlexFlexible{
+            overflow:visible !important;
+        }
+        div[id$="DelegateSearch-dialog"] .sapUiFixFlexFixed{
+            height:80px !important;
+        }
+        div[id$="DelegateSearch-dialog"] .sapMImg{
+            margin-top:3px !important;
+            margin-left:5px !important;
+            border-radius:3px !important;
+            margin-right: 10px !important;
+        }
+        div[id$="DelegateSearch-dialog"] .sapMLIBContent{
+            padding: 5px !important;
+        }
+        div[id$="DelegateSearch-dialog"] .sapMGrowingListTrigger{
+            border-top: none !important;
+        } 
+	</html:style> 
+	
+	<Page title="{i18n>delegationTitle}">
+
+	    <Table id="DelegationTable" class="sapUiSizeCompact" growing="true" growingThreshold="10" items="{path:'/d/results',  sorter: {
+            path: 'DfDate'} }" width="100%" noDataText="No Delegations" showNoData="true">
+            <columns>
+             <Column  hAlign="Left" width="30%">
+               <Text text="Delegate to"/>  
+             </Column>
+             <Column hAlign="Left" minScreenWidth="Tablet" demandPopin="true" width="25%">
+               <Text text="Start date"/>
+             </Column>
+             <Column  hAlign="Left" minScreenWidth="Tablet" demandPopin="true" width="25%">
+               <Text text="End Date"/>
+             </Column>
+             <Column  hAlign="Left" width="10%">
+               <Text text="Status"/>  
+             </Column>
+             <Column  hAlign="Left" width="10%">
+               <Text text=""/> 
+             </Column>
+            </columns>
+            <items>
+                <ColumnListItem>      
+                 <cells>
+                 <Text text="{DtPersonID} {DtPersonName}"/>
+                 <Text text="{path: 'DfDate', formatter: 'HR.util.Formatter.getNormalDate'}"/>
+                 <Text text="{path: 'DtDate', formatter: 'HR.util.Formatter.getNormalDate'}"/>
+                 <Text text="{Action}"/>
+                 <Button icon="sap-icon://delete" press="deleteDelegate" type="Reject"/>
+                 </cells>
+                </ColumnListItem>
+            </items>
+        </Table> 
+                    
+        <footer>
+	    <Toolbar>
+        <ToolbarSpacer/>
+           <Button id="AddButton" text="Add Delegation" type="Emphasized" press="createDelegate"/>
+        </Toolbar>
+	   </footer>
+	</Page>
+</core:View>	
