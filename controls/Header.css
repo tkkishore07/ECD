@@ -1,0 +1,12 @@
+.header .sapMImg {
+    border-radius:10px !important;
+    visibility: visible !important;
+}
+.header .sapMListShowSeparatorsAll .sapMLIBShowSeparator:last-child>td, 
+.header .sapMListShowSeparatorsAll .sapMListTblSubRow:last-child>td{
+    border-bottom: none !important;
+}                 
+.header .sapMListBGSolid .sapMLIB.sapMListTblRow, .header .sapMListTblSubRow{
+    background-color: rgba(254,254,254, 1) !important;
+
+}
