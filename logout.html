@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<title>SanDisk Launchpad - Logout</title>
+		<script type="text/javascript" 
+        	id="sap-ui-bootstrap"
+          	src="/sap/public/bc/ui5_ui5/1/resources/sap-ui-cachebuster/sap-ui-core.js"
+            data-sap-ui-libs= "sap.m"
+            data-sap-ui-language= "en"
+            data-sap-ui-theme= "custom_bluecrystal"
+            data-sap-ui-theme-roots=  '{"custom_bluecrystal" : "/sap/public/bc/themes/~client-100/UI5"}'
+            data-sap-ui-appCacheBuster= "./">
+        </script>
+		
+		<script type="text/javascript">
+			var app = new sap.m.App();
+			(function deleteAllCookies(){
+                var cookies = document.cookie.split(";");
+                for (var i = 0; i < cookies.length; i++) {
+                    document.cookie = cookies[i] + "=;expires=Thu, 01 Jan 1970 00:00:00 UTC";
+                }
+            })();
+			var page1 = new sap.m.Page({
+				title:"Logout",
+				content : [ 
+				            new sap.m.VBox({
+                                alignItems:"Center",
+                                justifyContent:"Center",
+                                items:[
+                                    new sap.m.Text({}),
+                                    new sap.m.Text({
+                						text: "You have logged out of SAP-Connect.",
+                						textAlign: "Center"
+            					    }),
+            					    new sap.m.Text({}),
+            					    new sap.m.Button("Login", {
+                						type: sap.m.ButtonType.Emphasized,
+                						text: "Login",
+                						press : function() {
+                							window.location.assign(document.location.origin);
+                						    }
+    				                })
+            					    ] // end of items
+				            })
+				] // end of page content
+				
+			});
+		    app.addPage(page1);
+		    app.placeAt("body");
+			</script>
+	</head>
+	<body id="body" class="sapUiBody">
+	</body>
+</html>

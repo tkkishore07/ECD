@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge;">
+		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+        <link href="./i18n/custom.css" media="all" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" 
+        	id="sap-ui-bootstrap"
+          	src="/sap/public/bc/ui5_ui5/1/resources/sap-ui-cachebuster/sap-ui-core.js"
+            data-sap-ui-libs= "sap.ui.layout,sap.suite.ui.commons,sap.m,sap.ui.commons"
+            data-sap-ui-language= "en"
+            data-sap-ui-theme= "custom_bluecrystal"
+            data-sap-ui-theme-roots=  '{"custom_bluecrystal" : "/sap/public/bc/themes/~client-100/UI5"}'
+            data-sap-ui-xx-bindingSyntax= "complex"
+            data-sap-ui-modules= "sap.ui.core.plugin.DeclarativeSupport"
+            data-sap-ui-resourceroots= '{"HR": "./"}'
+            data-sap-ui-appCacheBuster= "./">
+        </script>
+	<script>
+	   //oApplication.load("resources/sap-ui-core.js"); for phonegap*/
+	   
+	    new sap.m.Shell({
+					appWidthLimited: false,
+					app : new sap.ui.core.ComponentContainer({
+						name : "HR"		
+					})
+		}).placeAt("content");
+		
+	</script>
+
+	
+	</head>
+	<body class="sapUiBody" role="application" style="display:block;margin:0px">
+		<div id="content" style="height:99%"></div>
+	</body>
+	
+</html>
